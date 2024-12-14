@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+*,
+*::before,
+*::after {
+ box-sizing: border-box;
+ padding: 0;
+ margin: 0;
+}
+
+body {
+ font-family: "Rubik", sans-serif;
+ line-height: 1.6;
+}
