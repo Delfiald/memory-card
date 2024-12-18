@@ -8,7 +8,50 @@
  margin: 0;
 }
 
+:root {
+ --light-color: #fff;
+ --dark-color: #000;
+
+ --transition-medium: 0.3s all ease;
+}
+
+/* Utilities */
+button {
+ background: var(--light-color);
+ outline: none;
+ padding: 1rem;
+ cursor: pointer;
+ border: 1px solid var(--dark-color);
+ transition: var(--transition-medium);
+ border-radius: 10px;
+}
+
+button:hover {
+ opacity: 0.75;
+}
+
 body {
  font-family: "Rubik", sans-serif;
  line-height: 1.6;
+}
+
+a {
+ text-decoration: none;
+}
+
+ul,
+ol {
+ list-style: none;
+}
+
+#root {
+ position: relative;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ width: 100vw;
+ min-height: 100vh;
+ overflow-x: hidden;
+ gap: 1rem;
 }

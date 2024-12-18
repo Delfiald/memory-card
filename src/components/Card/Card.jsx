@@ -2,10 +2,10 @@ import "./card.css";
 
 function Card() {
  return (
-  <section>
+  <div>
    <div>Card Image</div>
    <div>Card Text</div>
-  </section>
+  </div>
  );
 }
 
