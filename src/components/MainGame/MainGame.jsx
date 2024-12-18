@@ -1,7 +1,7 @@
-import "./main.css";
+import "./mainGame.css";
 import Card from "../Card/Card";
 
-function Main() {
+function MainGame(currentScore, setCurrentScore, setBestScore, totalScore) {
  return (
   <main>
    <section className="card-wrapper">
@@ -11,4 +11,4 @@ function Main() {
  );
 }
 
-export default Main;
+export default MainGame;
