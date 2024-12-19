@@ -36,7 +36,13 @@ function Card({ pokemon, handleClickedCard }) {
      <div className="pokemon-name">
       <p>{pokemon.pokemonName}</p>
      </div>
-     <div className="pokemon-type"></div>
+     <div className="pokemon-type">
+      <img
+       className={pokemon.type}
+       src={`/types/${pokemon.type}.svg`}
+       alt={pokemon.type}
+      />
+     </div>
     </div>
     <div className="pokemon-image">
      <img src={pokemon.pokemonImage} alt="pokemon-image" />
