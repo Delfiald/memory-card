@@ -11,6 +11,7 @@
 :root {
  --light-color: #fff;
  --dark-color: #000;
+ --dark-color-600: #ccc;
 
  --transition-medium: 0.3s all ease;
 }

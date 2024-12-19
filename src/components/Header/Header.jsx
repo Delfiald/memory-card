@@ -1,6 +1,6 @@
 import "./header.css";
 
-function Header({ currentScore, bestScore, totalScore }) {
+function Header({ currentScore, bestScore, pokemonList }) {
  return (
   <>
    <header>
@@ -13,7 +13,9 @@ function Header({ currentScore, bestScore, totalScore }) {
     <ul className="score-wrapper">
      <li className="score">Score: {currentScore}</li>
      <li className="best-score">Best Score: {bestScore}</li>
-     <li className="total-score">0 / {totalScore}</li>
+     <li className="total-score">
+      {currentScore} / {pokemonList}
+     </li>
     </ul>
    </header>
   </>
