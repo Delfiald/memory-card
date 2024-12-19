@@ -1,8 +1,8 @@
 import Header from "../components/Header/Header";
 import MainGame from "../components/MainGame/MainGame";
 import Footer from "../components/Footer/Footer";
-import { useEffect, useState } from "react";
-import UseFetchPokemon from "../hooks/useFetchData";
+import { useCallback, useEffect, useState } from "react";
+import fetchPokemonData from "../hooks/fetchPokemonData";
 
 function Game() {
  const [gameState, setGameState] = useState(true);
@@ -10,6 +10,7 @@ function Game() {
  const [bestScore, setBestScore] = useState(0);
  const [savedCard, setSavedCard] = useState([]);
 
+ const [pokemonTotal, setPokemonTotal] = useState(null);
  const [pokemonList, setPokemonList] = useState([]);
 
  const [error, setError] = useState(null);
@@ -32,14 +33,22 @@ function Game() {
  const handleFetch = async (difficulty) => {
   setPokemonList([]);
   setCurrentScore(0);
-  const pokemonData = await UseFetchPokemon(setError, setLoading, difficulty);
+
+  const { getRandomPokemon } = fetchPokemonData(setError, setLoading);
+  const pokemonData = await getRandomPokemon(difficulty, pokemonTotal);
   pokemonData.map((data) => {
    handlePokemonList(data);
   });
  };
 
- useEffect(() => {
-  console.log(pokemonList);
+ const initializeTotalPokemon = useCallback(() => {
+  if (!pokemonTotal) {
+   const { getTotalPokemon } = fetchPokemonData(setError, setLoading);
+   getTotalPokemon(setPokemonTotal);
+  }
+ }, [pokemonTotal]);
+
+ const checkGameCompletion = useCallback(() => {
   if (pokemonList.length > 0) {
    const isFinished = pokemonList.every((pokemon) => pokemon.isClicked);
    if (isFinished) {
@@ -48,6 +57,14 @@ function Game() {
    }
   }
  }, [pokemonList]);
+
+ useEffect(() => {
+  initializeTotalPokemon();
+ }, [initializeTotalPokemon]);
+
+ useEffect(() => {
+  checkGameCompletion();
+ }, [checkGameCompletion]);
 
  return (
   <>
