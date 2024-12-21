@@ -11,9 +11,10 @@
 :root {
  --light-color: #fff;
  --dark-color: #000;
+ --dark-color-300: #333;
  --dark-color-600: #ccc;
 
- --transition-medium: 0.3s all ease;
+ --transition-medium: 0.3s all ease-in-out;
 }
 
 /* Utilities */
@@ -25,10 +26,15 @@ button {
  border: 1px solid var(--dark-color);
  transition: var(--transition-medium);
  border-radius: 10px;
+ font-weight: bold;
 }
 
 button:hover {
  opacity: 0.75;
+}
+
+button:active {
+ transform: scale(0.9);
 }
 
 body {

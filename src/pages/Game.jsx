@@ -7,6 +7,7 @@ import Modal from "../components/Modal/Modal";
 
 function Game() {
  const [gameState, setGameState] = useState(null);
+ const [isFetching, setIsFetching] = useState(false);
  const [difficulty, setDifficulty] = useState(null);
  const [currentScore, setCurrentScore] = useState(0);
  const [bestScore, setBestScore] = useState(0);
@@ -33,6 +34,7 @@ function Game() {
  };
 
  const handleStart = (difficultyValue = null) => {
+  if (isFetching) return;
   const resolvedDifficulty = difficultyValue || difficulty;
 
   if (difficultyValue) {
@@ -46,11 +48,24 @@ function Game() {
   handleFetch(resolvedDifficulty);
  };
 
+ const handleReturn = () => {
+  setDifficulty(null);
+  setGameState(null);
+  setPokemonList([]);
+  setCurrentScore(0);
+ };
+
  const handleFetch = async (difficultyValue) => {
+  if (isFetching) return;
+  setIsFetching(true);
   const resolvedDifficulty = difficultyValue || difficulty;
 
   const { getRandomPokemon } = fetchPokemonData(setError, setLoading);
-  const pokemonData = await getRandomPokemon(resolvedDifficulty, pokemonTotal);
+  const pokemonData = await getRandomPokemon(
+   resolvedDifficulty,
+   pokemonTotal,
+   setIsFetching
+  );
 
   pokemonData.map((data) => {
    handlePokemonList(data);
@@ -107,6 +122,7 @@ function Game() {
      currentScore={currentScore}
      handleStart={handleStart}
      difficulty={difficulty}
+     handleReturn={handleReturn}
     />
    )}
    <Footer />

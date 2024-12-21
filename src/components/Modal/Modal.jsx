@@ -1,6 +1,6 @@
 import "./modal.css";
 
-function GameFinish({ currentScore, handleStart, difficulty }) {
+function GameFinish({ currentScore, handleStart, difficulty, handleReturn }) {
  const handleNext = () => {
   if (difficulty === 5) {
    handleStart(8);
@@ -9,39 +9,68 @@ function GameFinish({ currentScore, handleStart, difficulty }) {
   }
  };
  return (
-  <div className="gameFinish">
-   <p>You Win</p>
-   {difficulty < 15 && <button onClick={() => handleNext()}>Next Game</button>}
-   <button onClick={() => handleStart()}>Retry</button>
-   <button>Return to Menu</button>
-   <p>Score {currentScore}</p>
+  <div className="game-finish">
+   <h2>You Win</h2>
+   <p className="score">Score {currentScore}</p>
+   {difficulty < 15 && (
+    <button className="next" onClick={() => handleNext()}>
+     Next Game <i className="fas fa-chevron-right"></i>
+    </button>
+   )}
+   <div className="modal-action">
+    <button className="retry" onClick={() => handleStart()}>
+     Retry
+    </button>
+    <button className="return" onClick={handleReturn}>
+     Return to Menu
+    </button>
+   </div>
   </div>
  );
 }
 
-function GameOver({ currentScore, handleStart }) {
+function GameOver({ currentScore, handleStart, handleReturn }) {
  return (
-  <div className="gameOver">
-   <p>Game Over</p>
-   <button onClick={() => handleStart()}>Retry</button>
-   <button>Return to Menu</button>
-   <p>Score {currentScore}</p>
+  <div className="game-over">
+   <h2>Game Over</h2>
+   <p className="score">Score {currentScore}</p>
+   <div className="modal-action">
+    <button className="retry" onClick={() => handleStart()}>
+     Retry
+    </button>
+    <button className="return" onClick={handleReturn}>
+     Return to Menu
+    </button>
+   </div>
   </div>
  );
 }
 
-function Modal({ gameState, currentScore, handleStart, difficulty }) {
+function Modal({
+ gameState,
+ currentScore,
+ handleStart,
+ difficulty,
+ handleReturn,
+}) {
  return (
   <section className="modal">
-   {gameState === "finished" ? (
-    <GameFinish
-     currentScore={currentScore}
-     handleStart={handleStart}
-     difficulty={difficulty}
-    />
-   ) : (
-    <GameOver currentScore={currentScore} handleStart={handleStart} />
-   )}
+   <div className="modal-wrapper">
+    {gameState === "finished" ? (
+     <GameFinish
+      currentScore={currentScore}
+      handleStart={handleStart}
+      difficulty={difficulty}
+      handleReturn={handleReturn}
+     />
+    ) : (
+     <GameOver
+      currentScore={currentScore}
+      handleStart={handleStart}
+      handleReturn={handleReturn}
+     />
+    )}
+   </div>
   </section>
  );
 }
