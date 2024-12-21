@@ -15,6 +15,9 @@ function fetchPokemonData(setError, setLoading) {
 
  const getRandomPokemon = async (difficulty, pokemonTotal, setIsFetching) => {
   setLoading(true);
+  const LOADING_TIME = 4000;
+  const startTime = Date.now();
+
   try {
    if (!pokemonTotal || !pokemonTotal.count) {
     throw new Error("Pokemon total is not set");
@@ -39,8 +42,14 @@ function fetchPokemonData(setError, setLoading) {
    setError(error.message);
    return null;
   } finally {
-   setLoading(false);
-   setIsFetching(false);
+   const endTime = Date.now();
+   const elapsedTime = endTime - startTime;
+   const delay = Math.max(LOADING_TIME - elapsedTime, 0);
+
+   setTimeout(() => {
+    setLoading(false);
+    setIsFetching(false);
+   }, delay);
   }
  };
 

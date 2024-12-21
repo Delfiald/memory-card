@@ -57,6 +57,7 @@ function App() {
   if (pokemonList.length > 0) {
    const isFinished = pokemonList.every((pokemon) => pokemon.isClicked);
    if (isFinished) {
+    console.log("test");
     setGameState("finished");
    }
   }
@@ -75,6 +76,10 @@ function App() {
   setGameState(null);
   setPokemonList([]);
   setCurrentScore(0);
+
+  if (error) {
+   setError(null);
+  }
  };
 
  const handleFetch = async (difficultyValue) => {
@@ -96,6 +101,9 @@ function App() {
 
  return (
   <>
+   {(loading || error) && (
+    <StateDisplay loading={loading} error={error} handleReturn={handleReturn} />
+   )}
    {(() => {
     switch (gameState) {
      case null:
@@ -111,6 +119,8 @@ function App() {
        <Difficulty handleStart={handleStart} handleReturn={handleReturn} />
       );
      case "start":
+     case "ended":
+     case "finished":
       return (
        <Game
         gameState={gameState}
@@ -131,7 +141,6 @@ function App() {
       return null;
     }
    })()}
-   {(loading || error) && <StateDisplay loading={loading} error={error} />}
   </>
  );
 }
