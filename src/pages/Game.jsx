@@ -4,7 +4,7 @@ import Footer from "../components/Footer/Footer";
 import { useCallback, useEffect, useState } from "react";
 import fetchPokemonData from "../hooks/fetchPokemonData";
 import Modal from "../components/Modal/Modal";
-import Option from "../components/Option/Option";
+import Option from "../components/Options/Options";
 
 function Game() {
  const [gameState, setGameState] = useState(null);

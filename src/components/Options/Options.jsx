@@ -1,4 +1,4 @@
-import "./option.css";
+import "./options.css";
 
 function Option({ setOptionOpen, handleStart, handleReturn }) {
  return (
