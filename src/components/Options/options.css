@@ -102,33 +102,3 @@
  bottom: 0;
  transform: translateY(50%);
 }
-
-.option-wrapper .option-container .close-option {
- border: none;
- height: inherit;
- z-index: 1;
-}
-
-.option-wrapper .option-container .close-option:hover {
- opacity: 1;
-}
-
-.option-wrapper .option-container .close-option i {
- transform: rotate(90deg);
-}
-
-.option-wrapper .option-container .close-option::before {
- content: "";
- position: absolute;
- top: 0;
- left: 50%;
- transform: translate(-50%, 0.5rem);
- border: 1px solid var(--dark-color-600);
- width: calc(100% - 1rem);
- height: calc(100% - 1rem);
- border-radius: 25px;
- background: rgba(230, 230, 230, 0.25);
- z-index: -1;
- box-shadow: inset 2px 1px 5px var(--dark-color-600),
-  inset -2px 1px 5px var(--dark-color-600);
-}
