@@ -39,14 +39,13 @@ function MainGame({
  };
 
  const handleClickedCard = (id) => {
-  if (!gameState) return;
+  if (gameState !== "start") return;
 
   if (!pokemonList.some((pokemon) => pokemon.id === id && pokemon.isClicked)) {
    handlePokemonList(id);
    handleScore();
   } else {
-   setGameState(false);
-   console.log("Game Over");
+   setGameState("ended");
   }
  };
 

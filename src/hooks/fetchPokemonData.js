@@ -13,7 +13,7 @@ function fetchPokemonData(setError, setLoading) {
   }
  };
 
- const getRandomPokemon = async (difficulty, pokemonTotal) => {
+ const getRandomPokemon = async (difficulty, pokemonTotal, setIsFetching) => {
   setLoading(true);
   try {
    if (!pokemonTotal || !pokemonTotal.count) {
@@ -40,6 +40,7 @@ function fetchPokemonData(setError, setLoading) {
    return null;
   } finally {
    setLoading(false);
+   setIsFetching(false);
   }
  };
 
