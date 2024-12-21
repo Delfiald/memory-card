@@ -8,19 +8,19 @@ function Home({ setGameState }) {
    <div className="home-action">
     <button onClick={() => setGameState("difficulty")}>
      <div className="icon">
-      <img src="./pokeball/card.png" alt="" />
+      <img src="./menu/card.png" alt="" />
      </div>
      <div>Start Game</div>
     </button>
     <button onClick={() => setGameState("collections")}>
      <div className="icon">
-      <img src="./pokeball/pokedex.png" alt="" />
+      <img src="./menu/pokedex.png" alt="" />
      </div>
      <div>Collections</div>
     </button>
     <button onClick={() => setGameState("credits")}>
      <div className="icon">
-      <img src="./pokeball/pokestar.png" alt="" />
+      <img src="./menu/pokestar.png" alt="" />
      </div>
      <div>Credits</div>
     </button>
