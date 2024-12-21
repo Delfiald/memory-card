@@ -10,6 +10,7 @@
 
 :root {
  --light-color: #fff;
+ --light-color-300: #f4f4f4;
  --dark-color: #000;
  --dark-color-300: #333;
  --dark-color-600: #ccc;
@@ -27,6 +28,7 @@ button {
  transition: var(--transition-medium);
  border-radius: 10px;
  font-weight: bold;
+ font-size: 1rem;
 }
 
 button:hover {
