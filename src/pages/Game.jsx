@@ -4,6 +4,7 @@ import Footer from "../components/Footer/Footer";
 import { useCallback, useEffect, useState } from "react";
 import fetchPokemonData from "../hooks/fetchPokemonData";
 import Modal from "../components/Modal/Modal";
+import Option from "../components/Options/Options";
 
 function Game() {
  const [gameState, setGameState] = useState(null);
@@ -18,6 +19,8 @@ function Game() {
 
  const [error, setError] = useState(null);
  const [loading, setLoading] = useState(true);
+
+ const [optionOpen, setOptionOpen] = useState(false);
 
  const handlePokemonList = (data) => {
   const newPokemon = {
@@ -105,6 +108,7 @@ function Game() {
     currentScore={currentScore}
     bestScore={bestScore}
     pokemonList={pokemonList.length}
+    setOptionOpen={setOptionOpen}
    />
    <MainGame
     gameState={gameState}
@@ -122,6 +126,13 @@ function Game() {
      currentScore={currentScore}
      handleStart={handleStart}
      difficulty={difficulty}
+     handleReturn={handleReturn}
+    />
+   )}
+   {optionOpen && (
+    <Option
+     setOptionOpen={setOptionOpen}
+     handleStart={handleStart}
      handleReturn={handleReturn}
     />
    )}

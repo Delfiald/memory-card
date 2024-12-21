@@ -1,11 +1,11 @@
 import "./header.css";
 
-function Header({ currentScore, bestScore, pokemonList }) {
+function Header({ currentScore, bestScore, pokemonList, setOptionOpen }) {
  return (
   <>
    <header>
     <aside>
-     <button>
+     <button className="option-button" onClick={() => setOptionOpen(true)}>
       <i className="fas fa-bars"></i>
      </button>
     </aside>
