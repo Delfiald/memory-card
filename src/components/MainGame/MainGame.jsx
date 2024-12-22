@@ -21,8 +21,18 @@ function MainGame({
   setPokemonList(shuffled);
  };
 
+ const handleSavePokemon = (id) => {
+  setSavedCard((prevState) => {
+   const isPokemonSaved = prevState.some((pokemon) => pokemon.id === id);
+   if (isPokemonSaved) return prevState;
+
+   const newPokemon = pokemonList.find((pokemon) => pokemon.id === id);
+   return [...prevState, newPokemon];
+  });
+ };
+
  const handlePokemonList = (id) => {
-  setSavedCard((prevState) => [...prevState, id]);
+  handleSavePokemon(id);
   setPokemonList((prevPokemon) => {
    const newPokemonList = prevPokemon.map((pokemon) =>
     pokemon.id === id ? { ...pokemon, isClicked: true } : pokemon

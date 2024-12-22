@@ -47,6 +47,7 @@ function App() {
  };
 
  const initializeTotalPokemon = useCallback(() => {
+  console.log(pokemonTotal);
   if (!pokemonTotal) {
    const { getTotalPokemon } = fetchPokemonData(setError, setLoading);
    getTotalPokemon(setPokemonTotal);
@@ -136,7 +137,13 @@ function App() {
        />
       );
      case "collections":
-      return <Collections savedCard={savedCard} />;
+      return (
+       <Collections
+        savedCard={savedCard}
+        pokemonTotal={pokemonTotal}
+        handleReturn={handleReturn}
+       />
+      );
      default:
       return null;
     }

@@ -226,3 +226,166 @@ ol {
 #home button:hover .icon {
  transform: translate(0, -50%) rotate(0);
 }
+
+#collections {
+ padding: 1rem;
+}
+
+#collections h2 {
+ font-size: 3rem;
+}
+
+#collections .collections-header {
+ padding: 1rem;
+ display: grid;
+ grid-template-columns: 75px 1fr 75px;
+ align-items: center;
+ justify-content: space-between;
+ gap: 1rem;
+ width: 100%;
+ border: 1px solid var(--dark-color-600);
+ border-radius: 15px;
+ box-shadow: 3px 5px 10px var(--dark-color-600);
+}
+
+#collections .collections-header .shown-pokemon {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ flex-direction: column;
+ position: relative;
+ border: 1px solid var(--dark-color-600);
+ border-radius: 10px;
+ cursor: pointer;
+ z-index: 1;
+ padding: 0;
+}
+
+#collections .collections-header .shown-pokemon .shown {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 1rem;
+ z-index: 1;
+ background: var(--light-color);
+ width: 100%;
+ height: 100%;
+ position: relative;
+ padding: 0.5rem;
+ border-radius: 10px;
+}
+
+#collections .collections-header .shown-pokemon .shown-list {
+ position: absolute;
+ top: calc(100% - 0.5rem);
+ left: 0;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ flex-direction: column;
+ width: 100%;
+ border: 1px solid var(--dark-color-600);
+ border-radius: 10px;
+ border-top-left-radius: 0;
+ border-top-right-radius: 0;
+ z-index: -2;
+ padding-top: 0.5rem;
+ overflow: hidden;
+ transition: var(--transition-medium);
+ transform-origin: top;
+ transform: scaleY(0);
+}
+
+#collections .collections-header .shown-pokemon:hover .shown-list {
+ transform: scaleY(1);
+}
+
+#collections .collections-header .shown-pokemon .shown-list > div {
+ border-bottom: 1px solid var(--dark-color-600);
+ width: 100%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ transition: var(--transition-medium);
+ padding: 0.5rem 0;
+ background: var(--light-color);
+}
+
+#collections .collections-header .shown-pokemon .shown-list > div:last-child {
+ border-bottom: none;
+}
+
+#collections .collections-header .shown-pokemon .shown-list > div:hover {
+ background: var(--light-color-300);
+}
+
+#collections .collections-header .pokemon-collected {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 0.5rem;
+ flex-direction: column;
+}
+
+#collections .collections-header .pokemon-collected > p {
+ font-weight: 500;
+ font-size: 1.25rem;
+}
+
+#collections .collections-header .pokemon-collected > p:last-child {
+ border-bottom: 1px solid var(--dark-color);
+ padding: 0 1rem;
+}
+
+#collections .card-list-wrapper {
+ flex: 1;
+ display: grid;
+ grid-template-columns: repeat(5, 200px);
+ grid-auto-rows: 250px;
+ justify-content: center;
+ align-items: center;
+ gap: 1rem;
+}
+
+#collections .collections-bottom {
+ width: 100%;
+ display: flex;
+ align-items: center;
+ justify-content: space-evenly;
+ gap: 1rem;
+}
+
+#collections .collections-bottom button {
+ width: 50px;
+ height: 50px;
+ border-radius: 50%;
+}
+
+#collections .collections-bottom .page-number-wrapper {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 0.5rem;
+}
+
+#collections .collections-bottom .page-number-wrapper > button {
+ position: relative;
+ box-shadow: none;
+}
+
+#collections .collections-bottom .page-number-wrapper > button.active {
+ box-shadow: 0px 0px 3px var(--dark-color-300);
+}
+
+#collections .collections-bottom .page-number-wrapper > button.active::before {
+ content: "";
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ width: calc(100% - 0.5rem);
+ height: calc(100% - 0.5rem);
+ border-radius: 50%;
+ border: 2px solid var(--dark-color-600);
+ box-shadow: 0px 0px 3px var(--dark-color-500);
+}
