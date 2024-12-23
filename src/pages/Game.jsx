@@ -16,6 +16,8 @@ function Game({
  setCurrentScore,
  handleStart,
  handleReturn,
+ isAnimating,
+ setIsAnimating,
 }) {
  const [bestScore, setBestScore] = useState(0);
  const [optionOpen, setOptionOpen] = useState(false);
@@ -37,6 +39,8 @@ function Game({
     pokemonList={pokemonList}
     setPokemonList={setPokemonList}
     setSavedCard={setSavedCard}
+    isAnimating={isAnimating}
+    setIsAnimating={setIsAnimating}
    />
    {gameState && gameState !== "start" && (
     <Modal

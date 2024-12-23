@@ -1,7 +1,16 @@
+import BackSideCard from "./BackSideCard";
 import "./card.css";
 
-function Card({ pokemon, handleClickedCard }) {
+function Card({
+ pokemonId,
+ pokemonName,
+ pokemonType,
+ pokemonImage,
+ handleClickedCard,
+ isAnimating,
+}) {
  const hoverHandler = (e) => {
+  if (isAnimating) return;
   const { clientX, clientY } = e;
   const card = e.currentTarget.getBoundingClientRect();
   const mouseX = clientX - card.left;
@@ -28,26 +37,35 @@ function Card({ pokemon, handleClickedCard }) {
   <div
    onMouseMove={(e) => hoverHandler(e)}
    onMouseLeave={(e) => resetRotation(e)}
-   onClick={() => handleClickedCard(pokemon.id)}
+   onClick={(e) => {
+    handleClickedCard(pokemonId);
+    resetRotation(e);
+   }}
    className="card"
   >
-   <div className="card-wrapper">
-    <div className="card-information">
-     <div className="pokemon-name">
-      <p>{pokemon.pokemonName}</p>
+   {isAnimating ? (
+    <div className="back-wrapper">
+     <BackSideCard />
+    </div>
+   ) : (
+    <div className="card-wrapper">
+     <div className="card-information">
+      <div className="pokemon-name">
+       <p>{pokemonName}</p>
+      </div>
+      <div className="pokemon-type">
+       <img
+        className={pokemonType}
+        src={`/types/${pokemonType}.svg`}
+        alt={pokemonType}
+       />
+      </div>
      </div>
-     <div className="pokemon-type">
-      <img
-       className={pokemon.type}
-       src={`/types/${pokemon.type}.svg`}
-       alt={pokemon.type}
-      />
+     <div className="pokemon-image">
+      <img src={pokemonImage} alt="pokemon-image" />
      </div>
     </div>
-    <div className="pokemon-image">
-     <img src={pokemon.pokemonImage} alt="pokemon-image" />
-    </div>
-   </div>
+   )}
   </div>
  );
 }
