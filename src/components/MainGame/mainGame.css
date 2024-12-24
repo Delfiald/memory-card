@@ -9,8 +9,8 @@ main {
 
 main .cards-list-wrapper {
  display: grid;
- grid-template-columns: repeat(5, 200px);
- grid-auto-rows: 275px;
+ grid-template-columns: repeat(5, 180px);
+ grid-auto-rows: 252px;
  justify-content: center;
  align-items: stretch;
  gap: 1rem;

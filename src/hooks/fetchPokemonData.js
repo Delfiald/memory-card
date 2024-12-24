@@ -53,9 +53,23 @@ function fetchPokemonData(setError, setLoading) {
   }
  };
 
+ const getDetailPokemon = async (pokemonId) => {
+  setLoading(true);
+
+  try {
+   const data = await fetchPokemon(`pokemon-species/${pokemonId}`);
+   return data;
+  } catch (error) {
+   setError(error.message);
+  } finally {
+   setLoading(false);
+  }
+ };
+
  return {
   getTotalPokemon,
   getRandomPokemon,
+  getDetailPokemon,
  };
 }
 

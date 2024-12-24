@@ -10,6 +10,8 @@ function MainGame({
  pokemonList,
  setPokemonList,
  setSavedCard,
+ isAnimating,
+ setIsAnimating,
 }) {
  const shufflePokemon = (newPokemonList) => {
   const shuffled = [...newPokemonList];
@@ -21,8 +23,18 @@ function MainGame({
   setPokemonList(shuffled);
  };
 
+ const handleSavePokemon = (id) => {
+  setSavedCard((prevState) => {
+   const isPokemonSaved = prevState.some((pokemon) => pokemon.id === id);
+   if (isPokemonSaved) return prevState;
+
+   const newPokemon = pokemonList.find((pokemon) => pokemon.id === id);
+   return [...prevState, newPokemon].sort((a, b) => a.id - b.id);
+  });
+ };
+
  const handlePokemonList = (id) => {
-  setSavedCard((prevState) => [...prevState, id]);
+  handleSavePokemon(id);
   setPokemonList((prevPokemon) => {
    const newPokemonList = prevPokemon.map((pokemon) =>
     pokemon.id === id ? { ...pokemon, isClicked: true } : pokemon
@@ -38,12 +50,20 @@ function MainGame({
   setBestScore((prevBestScore) => Math.max(prevBestScore, currentScore + 1));
  };
 
- const handleClickedCard = (id) => {
+ const handleClickedCard = async (id) => {
   if (gameState !== "start") return;
+  setIsAnimating(true);
 
   if (!pokemonList.some((pokemon) => pokemon.id === id && pokemon.isClicked)) {
-   handlePokemonList(id);
    handleScore();
+   await new Promise((resolve) => {
+    setTimeout(() => {
+     setIsAnimating(false);
+     resolve();
+    }, 1000);
+   });
+
+   handlePokemonList(id);
   } else {
    setGameState("ended");
   }
@@ -56,8 +76,12 @@ function MainGame({
      <Card
       key={pokemon.id}
       setCurrentScore={setCurrentScore}
-      pokemon={pokemon}
+      pokemonId={pokemon.id}
+      pokemonName={pokemon.pokemonName}
+      pokemonType={pokemon.type}
+      pokemonImage={pokemon.pokemonImage.artwork}
       handleClickedCard={handleClickedCard}
+      isAnimating={isAnimating}
      />
     ))}
    </section>

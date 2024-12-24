@@ -8,7 +8,7 @@
  align-items: center;
  justify-content: center;
  background-color: var(--light-color);
- z-index: 2;
+ z-index: 3;
 }
 
 .status-wrapper > div {
@@ -29,6 +29,7 @@
  animation: pokeball-throw 3s cubic-bezier(0.25, 1, 0.5, 1) forwards,
   pokeball-wiggle 2s ease-in-out 3s infinite;
  transform-origin: bottom center;
+ z-index: 1;
 }
 
 .loading-sprite img {

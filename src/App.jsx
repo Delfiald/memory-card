@@ -16,14 +16,31 @@ function App() {
  const [pokemonTotal, setPokemonTotal] = useState(null);
  const [pokemonList, setPokemonList] = useState([]);
  const [currentScore, setCurrentScore] = useState(0);
+ const [isAnimating, setIsAnimating] = useState(false);
+ const [isSprite, setIsSprite] = useState(false);
+ const [collectedOnly, setCollectedOnly] = useState(false);
 
  const handlePokemonList = (data) => {
   const newPokemon = {
    id: data.id,
-   pokemonImage: data.sprites.other["official-artwork"].front_default
-    ? data.sprites.other["official-artwork"].front_default
-    : data.sprites.other["official-artwork"].front_shiny,
+   pokemonImage: {
+    artwork: data.sprites.other["official-artwork"].front_default
+     ? data.sprites.other["official-artwork"].front_default
+     : data.sprites.other["official-artwork"].front_shiny,
+    sprite: data.sprites.front_default
+     ? data.sprites.front_default
+     : data.sprites.front_shiny,
+   },
    pokemonName: data.name,
+   pokemonHP: data.stats[0].base_stat,
+   pokemonAttack: data.stats[1].base_stat,
+   pokemonDefense: data.stats[2].base_stat,
+   pokemonSpeed: data.stats[5].base_stat,
+   pokemonHeight: data.height,
+   pokemonWeight: data.weight,
+   pokemonAbilities: data.abilities.map((ability) => ability.ability.name),
+   pokemonCries: data.cries.latest ? data.cries.latest : data.cries.legacy,
+   pokemonSpecies: data.species.url.split("/").slice(-2, -1).join("/"),
    type: data.types[0].type.name,
    isClicked: false,
   };
@@ -42,11 +59,13 @@ function App() {
   setGameState("start");
   setPokemonList([]);
   setCurrentScore(0);
+  setIsAnimating(false);
 
   handleFetch(resolvedDifficulty);
  };
 
  const initializeTotalPokemon = useCallback(() => {
+  console.log(pokemonTotal);
   if (!pokemonTotal) {
    const { getTotalPokemon } = fetchPokemonData(setError, setLoading);
    getTotalPokemon(setPokemonTotal);
@@ -57,11 +76,18 @@ function App() {
   if (pokemonList.length > 0) {
    const isFinished = pokemonList.every((pokemon) => pokemon.isClicked);
    if (isFinished) {
-    console.log("test");
     setGameState("finished");
+    setIsAnimating(true);
    }
   }
  }, [pokemonList]);
+
+ useEffect(() => {
+  const allCards = [...document.querySelectorAll(".card")];
+  allCards.map((card) => {
+   card.className = `card ${isAnimating ? "backside" : ""}`;
+  });
+ }, [isAnimating]);
 
  useEffect(() => {
   initializeTotalPokemon();
@@ -133,10 +159,24 @@ function App() {
         setCurrentScore={setCurrentScore}
         handleStart={handleStart}
         handleReturn={handleReturn}
+        isAnimating={isAnimating}
+        setIsAnimating={setIsAnimating}
        />
       );
      case "collections":
-      return <Collections savedCard={savedCard} />;
+      return (
+       <Collections
+        savedCard={savedCard}
+        pokemonTotal={pokemonTotal}
+        handleReturn={handleReturn}
+        setIsSprite={setIsSprite}
+        isSprite={isSprite}
+        collectedOnly={collectedOnly}
+        setCollectedOnly={setCollectedOnly}
+        setError={setError}
+        setLoading={setLoading}
+       />
+      );
      default:
       return null;
     }
