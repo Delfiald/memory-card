@@ -4,6 +4,7 @@ import Footer from "../components/Footer/Footer";
 import { useState } from "react";
 import Modal from "../components/Modal/Modal";
 import Option from "../components/Options/Options";
+import Help from "../components/Help/Help";
 
 function Game({
  gameState,
@@ -21,6 +22,8 @@ function Game({
  isAnimating,
  setIsAnimating,
  setError,
+ helpOpen,
+ setHelpOpen,
 }) {
  const [optionOpen, setOptionOpen] = useState(false);
 
@@ -31,6 +34,7 @@ function Game({
     bestScore={bestScore}
     pokemonList={pokemonList.length}
     setOptionOpen={setOptionOpen}
+    setHelpOpen={setHelpOpen}
    />
    <MainGame
     gameState={gameState}
@@ -44,6 +48,7 @@ function Game({
     isAnimating={isAnimating}
     setIsAnimating={setIsAnimating}
     setError={setError}
+    difficulty={difficulty}
    />
    {gameState && gameState !== "start" && (
     <Modal
@@ -61,6 +66,7 @@ function Game({
      handleReturn={handleReturn}
     />
    )}
+   {helpOpen && <Help gameState={gameState} setHelpOpen={setHelpOpen} />}
    <Footer />
   </section>
  );

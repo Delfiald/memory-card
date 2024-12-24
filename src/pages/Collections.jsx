@@ -2,6 +2,9 @@ import { useState } from "react";
 import Card from "../components/Card/Card";
 import BackSideCard from "../components/Card/BackSideCard";
 import fetchPokemonData from "../hooks/fetchPokemonData";
+import "../styles/collections.css";
+import Help from "../components/Help/Help";
+import PokemonDetails from "../components/Details/PokemonDetails";
 
 function CollectionsHeader({
  handleReturn,
@@ -10,12 +13,12 @@ function CollectionsHeader({
  dropdownShown,
  setDropdownShown,
  itemPerPage,
- setItemPerPage,
  isSprite,
  setIsSprite,
  collectedOnly,
- setCollectedOnly,
  setHelpOpen,
+ handlePokemonPerPage,
+ handleShowCollected,
 }) {
  return (
   <>
@@ -27,34 +30,9 @@ function CollectionsHeader({
     <i className="fas fa-arrow-turn-down"></i>
    </button>
    <div className="collections-header">
-    <button onClick={() => setCollectedOnly((prevState) => !prevState)}>
-     {collectedOnly ? "Collected Only" : "All"}
-    </button>
-    <div className="pokemon-collected">
-     <p>Pokemon Collected</p>
-     <p>
-      {savedCard} / {pokemonTotal}
-     </p>
-    </div>
     <div className="collections-action">
-     <button
-      onMouseEnter={() => setDropdownShown(true)}
-      className="shown-pokemon"
-      onMouseLeave={() => setDropdownShown(false)}
-     >
-      <div className="shown">
-       {itemPerPage}
-       {dropdownShown ? (
-        <i className="fas fa-chevron-down"> </i>
-       ) : (
-        <i className="fas fa-chevron-up"></i>
-       )}
-      </div>
-      <div className="shown-list">
-       <div onClick={() => setItemPerPage(25)}>25</div>
-       <div onClick={() => setItemPerPage(50)}>50</div>
-       <div onClick={() => setItemPerPage(100)}>100</div>
-      </div>
+     <button className="show-pokemon" onClick={handleShowCollected}>
+      {collectedOnly ? "Collected Only" : "All"}
      </button>
      <div className="image-toggler-wrapper">
       <input
@@ -82,6 +60,31 @@ function CollectionsHeader({
       </label>
      </div>
     </div>
+    <div className="pokemon-collected">
+     <p>Pokemon Collected</p>
+     <p>
+      {savedCard} / {pokemonTotal}
+     </p>
+    </div>
+    <button
+     onMouseEnter={() => setDropdownShown(true)}
+     className="pokemon-per-page"
+     onMouseLeave={() => setDropdownShown(false)}
+    >
+     <div className="shown">
+      {itemPerPage}
+      {dropdownShown ? (
+       <i className="fas fa-chevron-up"> </i>
+      ) : (
+       <i className="fas fa-chevron-down"></i>
+      )}
+     </div>
+     <div className="shown-list">
+      <div onClick={() => handlePokemonPerPage(25)}>25</div>
+      <div onClick={() => handlePokemonPerPage(50)}>50</div>
+      <div onClick={() => handlePokemonPerPage(100)}>100</div>
+     </div>
+    </button>
    </div>
   </>
  );
@@ -113,7 +116,7 @@ function CollectionsFooter({ pokemonTotal, itemPerPage, page, setPage }) {
 
     {page > 3 && <button onClick={() => setPage(page - 2)}>...</button>}
 
-    {page === totalPage && (
+    {totalPage > 3 && page === totalPage && (
      <button onClick={() => setPage(page - 2)}>{page - 2}</button>
     )}
 
@@ -125,7 +128,7 @@ function CollectionsFooter({ pokemonTotal, itemPerPage, page, setPage }) {
      <button onClick={() => setPage(page + 1)}>{page + 1}</button>
     )}
 
-    {page === 1 && (
+    {totalPage > 3 && page === 1 && (
      <button onClick={() => setPage(page + 2)}>{page + 2}</button>
     )}
 
@@ -141,145 +144,6 @@ function CollectionsFooter({ pokemonTotal, itemPerPage, page, setPage }) {
  );
 }
 
-function CollectionsHelp({ setHelpOpen }) {
- return (
-  <div className="help">
-   <div className="help-wrapper">
-    <div className="help-container">
-     <div className="help-header">
-      <h2>Collections Help</h2>
-     </div>
-     <div className="help-content">
-      <div className="content-top">
-       <div>
-        <i className="fas fa-info"></i> What is Collections
-       </div>
-       <div className="descriptions">{`Collections is a feature where you can view all the Pokémon you've discovered while playing the Pokémon Memory Card game. It acts as a visual record of your progress and achievements in uncovering new Pokémon.`}</div>
-      </div>
-      <div className="how-it-works">
-       <ul>
-        <li>
-         <div>1</div>
-         <div className="title">Discovering Pokémon</div>
-         <div className="">
-          Whenever you click on a Pokémon card for the first time in the game,
-          it will be added to your Collections.
-         </div>
-        </li>
-        <li>
-         <div>2</div>
-         <div className="title">No Duplicates</div>
-         <div className="">{`Pokémon that you've already discovered won't be added again, even if you click on their card multiple times.`}</div>
-        </li>
-        <li>
-         <div>3</div>
-         <div className="title">Your Personal Pokédex</div>
-         <div className="">
-          Think of Collections as your personal Pokédex! It tracks your unique
-          finds and grows as you explore and play more.
-         </div>
-        </li>
-       </ul>
-      </div>
-     </div>
-     <div className="help-footer">
-      <button onClick={() => setHelpOpen(false)}>Got It!</button>
-     </div>
-    </div>
-   </div>
-  </div>
- );
-}
-
-function PokemonDetails({
- pokemonDetails,
- setPokemonDetails,
- isSprite,
- flavorText,
-}) {
- const [audio] = useState(new Audio(pokemonDetails.pokemonCries));
-
- const playPokemonCries = () => {
-  audio.currentTime = 0;
-  audio.play();
-  audio.volume = 0.25;
- };
-
- return (
-  <div className="pokemon-details">
-   <div className="pokemon-details-wrapper">
-    <div className="pokemon-details-container">
-     <Card
-      pokemonId={pokemonDetails.id}
-      pokemonName={pokemonDetails.pokemonName}
-      pokemonType={pokemonDetails.type}
-      pokemonImage={
-       isSprite
-        ? pokemonDetails.pokemonImage.sprite
-        : pokemonDetails.pokemonImage.artwork
-      }
-     />
-     <div className="pokemon-information">
-      <div className="pokemon-name">{pokemonDetails.pokemonName}</div>
-      <div className="pokemon-descriptions">
-       <div className="pokemon-basic-information">
-        <div className="pokemon-id">NO. {pokemonDetails.id}</div>
-        <div className="pokemon-height">
-         <div>Height: {pokemonDetails.pokemonHeight / 10} m</div>
-        </div>
-        <div className="pokemon-weight">
-         <div>Weight: {pokemonDetails.pokemonWeight / 10} kg.</div>
-        </div>
-       </div>
-       <div className="pokemon-description">{flavorText}</div>
-      </div>
-      <div className="pokemon-stats">
-       <div className="pokemon-type">
-        <div className="stat-name">Type</div>
-        <div className="stat-detail">{pokemonDetails.type}</div>
-       </div>
-       <div className="pokemon-hp">
-        <div className="stat-name">HP</div>
-        <div className="stat-detail">{pokemonDetails.pokemonHP}</div>
-       </div>
-       <div className="pokemon-attack">
-        <div className="stat-name">Attack</div>
-        <div className="stat-detail">{pokemonDetails.pokemonAttack}</div>
-       </div>
-       <div className="pokemon-defense">
-        <div className="stat-name">Defense</div>
-        <div className="stat-detail">{pokemonDetails.pokemonDefense}</div>
-       </div>
-       <div className="pokemon-speed">
-        <div className="stat-name">Speed</div>
-        <div className="stat-detail">{pokemonDetails.pokemonSpeed}</div>
-       </div>
-      </div>
-      <div className="pokemon-abilities">
-       <p>Abilities</p>
-       <div className="abilities-wrapper">
-        {pokemonDetails.pokemonAbilities.map((ability, index) => (
-         <div key={index} className="ability">
-          {ability}
-         </div>
-        ))}
-       </div>
-      </div>
-      <div className="pokemon-cries">
-       <button onClick={playPokemonCries}>
-        <i className="fas fa-volume-high"></i>
-       </button>
-      </div>
-     </div>
-     <button onClick={() => setPokemonDetails(null)} className="close-button">
-      <i className="fas fa-turn-down"></i>
-     </button>
-    </div>
-   </div>
-  </div>
- );
-}
-
 function Collections({
  savedCard,
  pokemonTotal,
@@ -290,16 +154,28 @@ function Collections({
  setCollectedOnly,
  setError,
  setLoading,
+ gameState,
+ helpOpen,
+ setHelpOpen,
 }) {
  const [dropdownShown, setDropdownShown] = useState(false);
  const [itemPerPage, setItemPerPage] = useState(100);
  const [page, setPage] = useState(1);
- const [helpOpen, setHelpOpen] = useState(false);
  const [pokemonDetails, setPokemonDetails] = useState(null);
  const [flavorText, setFlavorText] = useState(null);
 
  const handleClickedCard = (pokemon) => {
   setPokemonDetails(pokemon);
+ };
+
+ const handlePokemonPerPage = (item) => {
+  setItemPerPage(item);
+  setPage(1);
+ };
+
+ const handleShowCollected = () => {
+  setCollectedOnly((prevState) => !prevState);
+  setPage(1);
  };
 
  const fetchPokemonDetails = async (pokemon) => {
@@ -319,6 +195,23 @@ function Collections({
   }
  };
 
+ const handleCard = (pokemon) => {
+  return (
+   <Card
+    key={pokemon.id}
+    pokemonId={pokemon.id}
+    pokemonName={pokemon.pokemonName}
+    pokemonType={pokemon.type}
+    pokemonImage={
+     isSprite ? pokemon.pokemonImage.sprite : pokemon.pokemonImage.artwork
+    }
+    handleClickedCard={() => {
+     handleClickedCard(pokemon), fetchPokemonDetails(pokemon);
+    }}
+   />
+  );
+ };
+
  return (
   <section id="collections">
    <CollectionsHeader
@@ -328,46 +221,24 @@ function Collections({
     dropdownShown={dropdownShown}
     setDropdownShown={setDropdownShown}
     itemPerPage={itemPerPage}
-    setItemPerPage={setItemPerPage}
     isSprite={isSprite}
     setIsSprite={setIsSprite}
     collectedOnly={collectedOnly}
-    setCollectedOnly={setCollectedOnly}
     setHelpOpen={setHelpOpen}
+    handlePokemonPerPage={handlePokemonPerPage}
+    handleShowCollected={handleShowCollected}
    />
    <div className="card-list-wrapper">
     {collectedOnly
-     ? savedCard.map((pokemon) => (
-        <Card
-         key={pokemon.id}
-         pokemonId={pokemon.id}
-         pokemonName={pokemon.pokemonName}
-         pokemonType={pokemon.type}
-         pokemonImage={
-          isSprite ? pokemon.pokemonImage.sprite : pokemon.pokemonImage.artwork
-         }
-         handleClickedCard={() => {
-          handleClickedCard(pokemon), fetchPokemonDetails(pokemon);
-         }}
-        />
-       ))
+     ? savedCard
+        .slice((page - 1) * itemPerPage, page * itemPerPage)
+        .map((pokemon) => handleCard(pokemon))
      : Array.from({ length: itemPerPage }, (_, index) => {
         const pokemonId = (page - 1) * itemPerPage + index + 1;
         if (pokemonId > pokemonTotal) return null;
         const pokemon = savedCard.find((poke) => poke.id === pokemonId);
         return pokemon ? (
-         <Card
-          key={pokemon.id}
-          pokemonId={pokemon.id}
-          pokemonName={pokemon.pokemonName}
-          pokemonType={pokemon.type}
-          pokemonImage={
-           isSprite ? pokemon.pokemonImage.sprite : pokemon.pokemonImage.artwork
-          }
-          handleClickedCard={() => {
-           handleClickedCard(pokemon), fetchPokemonDetails(pokemon);
-          }}
-         />
+         handleCard(pokemon)
         ) : (
          <div key={`placeholder-${index + 1}`} className="card backside">
           <BackSideCard />
@@ -375,7 +246,7 @@ function Collections({
         );
        })}
    </div>
-   {helpOpen && <CollectionsHelp setHelpOpen={setHelpOpen} />}
+   {helpOpen && <Help gameState={gameState} setHelpOpen={setHelpOpen} />}
    {pokemonDetails && (
     <PokemonDetails
      pokemonDetails={pokemonDetails}

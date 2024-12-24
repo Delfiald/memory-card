@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { removeItem } from "../utils/localStorage";
+import "../styles/home.css";
 
 function Reset({ handleReset, setResetOpen }) {
  return (
@@ -38,7 +39,10 @@ function Home({ setGameState, setSavedCard, setBestScore, setError }) {
  return (
   <section id="home">
    <header>
-    <h1>Pokemon</h1>
+    <h1>
+     Pokémon
+     <span></span>
+    </h1>
     <h2>Memory Card</h2>
    </header>
    <div className="home-action">

@@ -8,6 +8,7 @@ function Card({
  pokemonImage,
  handleClickedCard,
  isAnimating,
+ gameState,
 }) {
  const hoverHandler = (e) => {
   if (isAnimating) return;
@@ -41,14 +42,14 @@ function Card({
     handleClickedCard && handleClickedCard(pokemonId);
     resetRotation(e);
    }}
-   className="card"
+   className={`card ${gameState === "start" && "backside"}`}
   >
    {isAnimating ? (
     <div className="back-wrapper">
      <BackSideCard />
     </div>
    ) : (
-    <div className="card-wrapper">
+    <div className={`card-wrapper ${pokemonType}`}>
      <div className="card-information">
       <div className="pokemon-name">
        <p>{pokemonName}</p>

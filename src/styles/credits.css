@@ -1,0 +1,103 @@
+#credits .credits-wrapper {
+ position: relative;
+ padding: 1rem 1rem 3rem 0;
+ border: 1px solid var(--dark-color-600);
+ gap: 1rem;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ flex-direction: column;
+ border-radius: 15px;
+ min-width: 700px;
+ box-shadow: 2px 3px 5px var(--dark-color-600);
+}
+
+#credits a {
+ padding: 0.25rem 0.75rem;
+ border-radius: 25px;
+ background: rgba(0, 0, 0, 0.05);
+ color: var(--dark-color);
+ width: 100%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-weight: 300;
+ transition: var(--transition-medium);
+ box-shadow: 2px 3px 5px var(--dark-color-600),
+  inset 2px 3px 5px var(--dark-color-600);
+ font-size: 0.9rem;
+}
+
+#credits a:hover {
+ transform: translateY(-2.5px);
+ box-shadow: 4px 5px 7px var(--dark-color-600);
+}
+
+#credits .credits-wrapper h2 {
+ font-size: 3rem;
+}
+
+#credits .credits-wrapper .credits-body {
+ flex: 1;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ flex-direction: column;
+ gap: 2rem;
+ padding: 1rem;
+ border-radius: 15px;
+ border: 1px solid var(--dark-color-600);
+ box-shadow: inset 2px 3px 5px var(--dark-color-600);
+}
+
+#credits .credits-wrapper .credits-body > div > div:first-child {
+ font-weight: 500;
+}
+
+#credits .credits-wrapper .credits-body .api {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 0.5rem;
+ flex-direction: column;
+ padding: 0.5rem 1rem;
+}
+
+#credits .credits-wrapper .credits-body .other-assets {
+ display: grid;
+ align-items: center;
+ justify-content: center;
+ grid-template-columns: repeat(2, 1fr);
+ gap: 0.5rem;
+}
+
+#credits .credits-wrapper .credits-body .other-assets > div {
+ display: flex;
+ align-items: stretch;
+}
+
+#credits .credits-wrapper .credits-body .other-assets > div:first-child {
+ grid-column: 1 / 2;
+ grid-row: 1 / 4;
+ align-self: start;
+ justify-self: start;
+ padding: 0.25rem;
+}
+
+#credits .return-button {
+ position: absolute;
+ bottom: 0;
+ left: 50%;
+ width: 40px;
+ height: 40px;
+ border-radius: 50%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ transform: translate(-50%, 50%);
+}
+
+#credits .return-button i {
+ font-size: 1.25rem;
+ transform: rotate(90deg);
+}

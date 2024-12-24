@@ -23,6 +23,7 @@ function App() {
  const [isAnimating, setIsAnimating] = useState(false);
  const [isSprite, setIsSprite] = useState(false);
  const [collectedOnly, setCollectedOnly] = useState(false);
+ const [helpOpen, setHelpOpen] = useState(false);
 
  const handlePokemonList = (data) => {
   const newPokemon = {
@@ -65,7 +66,12 @@ function App() {
   setGameState("start");
   setPokemonList([]);
   setCurrentScore(0);
-  setIsAnimating(false);
+
+  setIsAnimating(true);
+
+  setTimeout(() => {
+   setIsAnimating(false);
+  }, 4500);
 
   handleFetch(resolvedDifficulty);
  };
@@ -171,6 +177,8 @@ function App() {
         isAnimating={isAnimating}
         setIsAnimating={setIsAnimating}
         setError={setError}
+        helpOpen={helpOpen}
+        setHelpOpen={setHelpOpen}
        />
       );
      case "collections":
@@ -185,6 +193,9 @@ function App() {
         setCollectedOnly={setCollectedOnly}
         setError={setError}
         setLoading={setLoading}
+        gameState={gameState}
+        helpOpen={helpOpen}
+        setHelpOpen={setHelpOpen}
        />
       );
      case "credits":
