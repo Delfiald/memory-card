@@ -945,6 +945,27 @@ ol {
  box-shadow: 2px 3px 5px var(--dark-color-600);
 }
 
+#credits a {
+ padding: 0.25rem 0.75rem;
+ border-radius: 25px;
+ background: rgba(0, 0, 0, 0.05);
+ color: var(--dark-color);
+ width: 100%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-weight: 300;
+ transition: var(--transition-medium);
+ box-shadow: 2px 3px 5px var(--dark-color-600),
+  inset 2px 3px 5px var(--dark-color-600);
+ font-size: 0.9rem;
+}
+
+#credits a:hover {
+ transform: translateY(-2.5px);
+ box-shadow: 4px 5px 7px var(--dark-color-600);
+}
+
 #credits .credits-wrapper h2 {
  font-size: 3rem;
 }
@@ -972,8 +993,7 @@ ol {
  justify-content: center;
  gap: 0.5rem;
  flex-direction: column;
- border-bottom: 1px solid var(--dark-color-600);
- padding: 0 1rem;
+ padding: 0.5rem 1rem;
 }
 
 #credits .credits-wrapper .credits-body .other-assets {
@@ -981,12 +1001,20 @@ ol {
  align-items: center;
  justify-content: center;
  grid-template-columns: repeat(2, 1fr);
+ gap: 0.5rem;
+}
+
+#credits .credits-wrapper .credits-body .other-assets > div {
+ display: flex;
+ align-items: stretch;
 }
 
 #credits .credits-wrapper .credits-body .other-assets > div:first-child {
  grid-column: 1 / 2;
  grid-row: 1 / 3;
  align-self: start;
+ justify-self: start;
+ padding: 0.25rem;
 }
 
 #credits .return-button {

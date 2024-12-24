@@ -32,6 +32,7 @@ function Home({ setGameState, setSavedCard, setBestScore, setError }) {
   setBestScore(0);
   removeItem("savedPokemon", setError);
   removeItem("bestScore", setError);
+  setResetOpen(false);
  };
 
  return (
