@@ -38,7 +38,7 @@ function Card({
    onMouseMove={(e) => hoverHandler(e)}
    onMouseLeave={(e) => resetRotation(e)}
    onClick={(e) => {
-    handleClickedCard(pokemonId);
+    handleClickedCard && handleClickedCard(pokemonId);
     resetRotation(e);
    }}
    className="card"

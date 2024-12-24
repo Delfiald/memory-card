@@ -1,4 +1,5 @@
 .card {
+ aspect-ratio: 5 / 7;
  border: 1px solid var(--dark-color-600);
  padding: 0.65rem;
  display: flex;
@@ -44,7 +45,8 @@
 
 .card .pokemon-name {
  font-weight: 500;
- align-self: start;
+ align-self: center;
+ justify-self: start;
 }
 
 .card .pokemon-type {

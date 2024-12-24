@@ -18,6 +18,7 @@ function App() {
  const [currentScore, setCurrentScore] = useState(0);
  const [isAnimating, setIsAnimating] = useState(false);
  const [isSprite, setIsSprite] = useState(false);
+ const [collectedOnly, setCollectedOnly] = useState(false);
 
  const handlePokemonList = (data) => {
   const newPokemon = {
@@ -31,6 +32,15 @@ function App() {
      : data.sprites.front_shiny,
    },
    pokemonName: data.name,
+   pokemonHP: data.stats[0].base_stat,
+   pokemonAttack: data.stats[1].base_stat,
+   pokemonDefense: data.stats[2].base_stat,
+   pokemonSpeed: data.stats[5].base_stat,
+   pokemonHeight: data.height,
+   pokemonWeight: data.weight,
+   pokemonAbilities: data.abilities.map((ability) => ability.ability.name),
+   pokemonCries: data.cries.latest ? data.cries.latest : data.cries.legacy,
+   pokemonSpecies: data.species.url.split("/").slice(-2, -1).join("/"),
    type: data.types[0].type.name,
    isClicked: false,
   };
@@ -159,8 +169,12 @@ function App() {
         savedCard={savedCard}
         pokemonTotal={pokemonTotal}
         handleReturn={handleReturn}
-        isSprite={isSprite}
         setIsSprite={setIsSprite}
+        isSprite={isSprite}
+        collectedOnly={collectedOnly}
+        setCollectedOnly={setCollectedOnly}
+        setError={setError}
+        setLoading={setLoading}
        />
       );
      default:
