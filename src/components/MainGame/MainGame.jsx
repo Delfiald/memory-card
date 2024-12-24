@@ -94,6 +94,7 @@ function MainGame({
       pokemonImage={pokemon.pokemonImage.artwork}
       handleClickedCard={handleClickedCard}
       isAnimating={isAnimating}
+      gameState={gameState}
      />
     ))}
    </section>

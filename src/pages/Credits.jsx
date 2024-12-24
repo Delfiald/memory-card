@@ -1,3 +1,5 @@
+import "../styles/credits.css";
+
 function Credits({ handleReturn }) {
  return (
   <section id="credits">
@@ -14,6 +16,15 @@ function Credits({ handleReturn }) {
      </div>
      <div className="other-assets">
       <div>Assets from</div>
+      <div className="assets">
+       <a
+        href="https://github.com/duiker101/pokemon-type-svg-icons"
+        target="_blank"
+        rel="noopener noreferrer"
+       >
+        duiker101
+       </a>
+      </div>
       <div className="assets">
        <a href="https://icons8.com" target="_blank" rel="noopener noreferrer">
         icons8.com

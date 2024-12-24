@@ -14,6 +14,7 @@
  transform-style: preserve-3d;
  transition: 0.35s cubic-bezier(0.2, 0.8, 0.5, 1);
  transform: perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1);
+ background: #fff;
 }
 
 .card.backside {
@@ -32,6 +33,8 @@
  flex-direction: column;
  gap: 0.5rem;
  border-radius: 5px;
+ box-shadow: inset 1px 1px 3px var(--dark-color-500);
+ background: url("./noise.png") center center / cover no-repeat;
 }
 
 .card .card-wrapper .card-information {
@@ -51,6 +54,7 @@
  align-self: center;
  justify-self: start;
  width: 100%;
+ filter: drop-shadow(0px 0px 3px var(--light-color-300));
 }
 
 .card .pokemon-type {
@@ -81,14 +85,38 @@
  justify-content: center;
  border-end-end-radius: 5px;
  border-end-start-radius: 5px;
- border: 1px solid var(--dark-color-600);
+ border: 3px solid var(--light-color);
+ border-bottom: 5px solid var(--light-color);
  padding: 0.25rem;
+ box-shadow: 1px 1px 3px var(--dark-color-600),
+  inset 1px 1px 3px var(--dark-color-500);
 }
 
 .card .pokemon-image img {
  width: 100%;
  height: 100%;
  object-fit: contain;
+ filter: drop-shadow(2px 3px 5px var(--dark-color-500));
+}
+
+.pokemon-details-container .card {
+ padding: 1rem;
+}
+
+.pokemon-details-container .card-wrapper {
+ padding: 0.5rem;
+ box-shadow: inset 5px 5px 5px var(--dark-color-500);
+}
+
+.pokemon-details-container .card .pokemon-image {
+ border: 5px solid var(--light-color);
+ border-bottom: 15px solid var(--light-color);
+ box-shadow: 3px 3px 5px var(--dark-color-600),
+  inset 3px 3px 5px var(--dark-color-500);
+}
+
+.pokemon-details-container .card .pokemon-image img {
+ filter: drop-shadow(4px 5px 8px var(--dark-color-500));
 }
 
 /* SVG */
@@ -134,28 +162,28 @@
 }
 
 .dragon {
- background: #0c69c8;
- box-shadow: 0 0 10px #0c69c8;
+ background: #9b8026;
+ box-shadow: 0 0 10px #9b8026;
 }
 
 .electric {
- background: #f2d94e;
- box-shadow: 0 0 10px #f2d94e;
+ background: #e1c03b;
+ box-shadow: 0 0 10px #e1c03b;
 }
 
 .fire {
- background: #fba54c;
- box-shadow: 0 0 10px #fba54c;
+ background: #e43020;
+ box-shadow: 0 0 10px #e43020;
 }
 
 .fairy {
- background: #ee90e6;
- box-shadow: 0 0 10px #ee90e6;
+ background: #ab3662;
+ box-shadow: 0 0 10px #ab3662;
 }
 
 .fighting {
- background: #d3425f;
- box-shadow: 0 0 10px #d3425f;
+ background: #cf4d27;
+ box-shadow: 0 0 10px #cf4d27;
 }
 
 .flying {
@@ -194,13 +222,13 @@
 }
 
 .psychic {
- background: #fa8581;
- box-shadow: 0 0 10px #fa8581;
+ background: #b76db3;
+ box-shadow: 0 0 10px #b76db3;
 }
 
 .rock {
- background: #c9bb8a;
- box-shadow: 0 0 10px #c9bb8a;
+ background: #b59d73;
+ box-shadow: 0 0 10px #b59d73;
 }
 
 .steel {
@@ -211,6 +239,78 @@
 .water {
  background: #539ddf;
  box-shadow: 0 0 10px #539ddf;
+}
+
+.card .card-wrapper.bug {
+ background-color: #a4d14b; /* Bug */
+}
+
+.card .card-wrapper.dark {
+ background-color: #7a7a7a; /* Dark */
+}
+
+.card .card-wrapper.dragon {
+ background-color: #dbac39; /* Dragon */
+}
+
+.card .card-wrapper.electric {
+ background-color: #fee000; /* Electric */
+}
+
+.card .card-wrapper.fairy {
+ background-color: #e05195; /* Fairy */
+}
+
+.card .card-wrapper.fighting {
+ background-color: #eb9038; /* Fighting */
+}
+
+.card .card-wrapper.fire {
+ background-color: #ef6d40; /* Fire */
+}
+
+.card .card-wrapper.flying {
+ background-color: #a1bbec; /* Flying */
+}
+
+.card .card-wrapper.ghost {
+ background-color: #8a9bed; /* Ghost */
+}
+
+.card .card-wrapper.grass {
+ background-color: #74c566; /* Grass */
+}
+
+.card .card-wrapper.ground {
+ background-color: #dc871c; /* Ground */
+}
+
+.card .card-wrapper.ice {
+ background-color: #8cd8d1; /* Ice */
+}
+
+.card .card-wrapper.normal {
+ background-color: #c2c6c2; /* Normal */
+}
+
+.card .card-wrapper.poison {
+ background-color: #d08ede; /* Poison */
+}
+
+.card .card-wrapper.psychic {
+ background-color: #d789ba; /* Psychic */
+}
+
+.card .card-wrapper.rock {
+ background-color: #c9bb8a; /* Rock */
+}
+
+.card .card-wrapper.steel {
+ background-color: #6fa7b6; /* Steel */
+}
+
+.card .card-wrapper.water {
+ background-color: #76c6f4; /* Water */
 }
 
 @keyframes card-show {

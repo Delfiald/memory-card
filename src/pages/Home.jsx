@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { removeItem } from "../utils/localStorage";
+import "../styles/home.css";
 
 function Reset({ handleReset, setResetOpen }) {
  return (
