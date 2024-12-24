@@ -6,7 +6,16 @@ function Loading() {
    <div className="loading-sprite">
     <img src="./pokeball/1.png" alt="" />
    </div>
-   <h2>Loading...</h2>
+   <div className="loading-wrapper">
+    <div className="circle"></div>
+    <div className="circle"></div>
+    <div className="circle"></div>
+    <div className="circle"></div>
+    <div className="circle"></div>
+    <div className="circle"></div>
+    <div className="circle"></div>
+    <div className="circle"></div>
+   </div>
   </div>
  );
 }
