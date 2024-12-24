@@ -119,7 +119,7 @@
 }
 
 #game .help .help-container .help-content .how-it-works > ul > li:nth-child(5) {
- grid-column: 2 / 3;
+ grid-column: 1 / 3;
 }
 
 #game
