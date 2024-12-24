@@ -1,34 +1,19 @@
 import fetchPokemon from "../services/pokemonApi";
 
 function fetchPokemonData(setError, setLoading) {
- const getTotalPokemon = async (setPokemonTotal) => {
-  setLoading(true);
-  try {
-   const data = await fetchPokemon("pokemon?limit=1&offset=0");
-   setPokemonTotal(data);
-  } catch (error) {
-   setError(error.message);
-  } finally {
-   setLoading(false);
-  }
- };
-
  const getRandomPokemon = async (difficulty, pokemonTotal, setIsFetching) => {
   setLoading(true);
   const LOADING_TIME = 4000;
   const startTime = Date.now();
 
   try {
-   if (!pokemonTotal || !pokemonTotal.count) {
+   if (!pokemonTotal) {
     throw new Error("Pokemon total is not set");
    }
 
    const randomIds = new Set();
    while (randomIds.size < difficulty) {
-    let getRandomId = Math.floor(Math.random() * pokemonTotal.count + 1);
-    if (getRandomId > 1025) {
-     getRandomId = 10001 + (getRandomId - 1026);
-    }
+    let getRandomId = Math.floor(Math.random() * pokemonTotal) + 1;
     randomIds.add(getRandomId);
    }
 
@@ -67,7 +52,6 @@ function fetchPokemonData(setError, setLoading) {
  };
 
  return {
-  getTotalPokemon,
   getRandomPokemon,
   getDetailPokemon,
  };

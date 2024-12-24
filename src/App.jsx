@@ -7,15 +7,16 @@ import Collections from "./pages/Collections";
 import StateDisplay from "./components/StateDisplay/StateDisplay";
 import Credits from "./pages/Credits";
 import { getItem } from "./utils/localStorage";
+import { nameFormatter, adjustFontSize } from "./utils/nameFormatter";
 
 function App() {
  const [gameState, setGameState] = useState(null);
  const [difficulty, setDifficulty] = useState(null);
  const [savedCard, setSavedCard] = useState([]);
  const [error, setError] = useState(null);
- const [loading, setLoading] = useState(true);
+ const [loading, setLoading] = useState(false);
  const [isFetching, setIsFetching] = useState(false);
- const [pokemonTotal, setPokemonTotal] = useState(null);
+ const [pokemonTotal] = useState(1025);
  const [pokemonList, setPokemonList] = useState([]);
  const [currentScore, setCurrentScore] = useState(0);
  const [bestScore, setBestScore] = useState(0);
@@ -34,14 +35,16 @@ function App() {
      ? data.sprites.front_default
      : data.sprites.front_shiny,
    },
-   pokemonName: data.name,
+   pokemonName: nameFormatter(data.name),
    pokemonHP: data.stats[0].base_stat,
    pokemonAttack: data.stats[1].base_stat,
    pokemonDefense: data.stats[2].base_stat,
    pokemonSpeed: data.stats[5].base_stat,
    pokemonHeight: data.height,
    pokemonWeight: data.weight,
-   pokemonAbilities: data.abilities.map((ability) => ability.ability.name),
+   pokemonAbilities: data.abilities.map((ability) =>
+    nameFormatter(ability.ability.name)
+   ),
    pokemonCries: data.cries.latest ? data.cries.latest : data.cries.legacy,
    pokemonSpecies: data.species.url.split("/").slice(-2, -1).join("/"),
    type: data.types[0].type.name,
@@ -67,14 +70,8 @@ function App() {
   handleFetch(resolvedDifficulty);
  };
 
- const initializeTotalPokemon = useCallback(() => {
-  if (!pokemonTotal) {
-   const { getTotalPokemon } = fetchPokemonData(setError, setLoading);
-   getTotalPokemon(setPokemonTotal);
-  }
- }, [pokemonTotal]);
-
  const checkGameCompletion = useCallback(() => {
+  adjustFontSize();
   if (pokemonList.length > 0) {
    const isFinished = pokemonList.every((pokemon) => pokemon.isClicked);
    if (isFinished) {
@@ -99,10 +96,6 @@ function App() {
    setBestScore(savedScore);
   }
  }, []);
-
- useEffect(() => {
-  initializeTotalPokemon();
- }, [initializeTotalPokemon]);
 
  useEffect(() => {
   checkGameCompletion();

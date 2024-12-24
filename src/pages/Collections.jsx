@@ -324,7 +324,7 @@ function Collections({
    <CollectionsHeader
     handleReturn={handleReturn}
     savedCard={savedCard.length}
-    pokemonTotal={pokemonTotal.count}
+    pokemonTotal={pokemonTotal}
     dropdownShown={dropdownShown}
     setDropdownShown={setDropdownShown}
     itemPerPage={itemPerPage}
@@ -353,7 +353,7 @@ function Collections({
        ))
      : Array.from({ length: itemPerPage }, (_, index) => {
         const pokemonId = (page - 1) * itemPerPage + index + 1;
-        if (pokemonId > pokemonTotal.count) return null;
+        if (pokemonId > pokemonTotal) return null;
         const pokemon = savedCard.find((poke) => poke.id === pokemonId);
         return pokemon ? (
          <Card
@@ -364,7 +364,9 @@ function Collections({
           pokemonImage={
            isSprite ? pokemon.pokemonImage.sprite : pokemon.pokemonImage.artwork
           }
-          handleClickedCard={() => handleClickedCard(pokemon)}
+          handleClickedCard={() => {
+           handleClickedCard(pokemon), fetchPokemonDetails(pokemon);
+          }}
          />
         ) : (
          <div key={`placeholder-${index + 1}`} className="card backside">
@@ -383,7 +385,7 @@ function Collections({
     />
    )}
    <CollectionsFooter
-    pokemonTotal={collectedOnly ? savedCard.length : pokemonTotal.count}
+    pokemonTotal={collectedOnly ? savedCard.length : pokemonTotal}
     itemPerPage={itemPerPage}
     page={page}
     setPage={setPage}
