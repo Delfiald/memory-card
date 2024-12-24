@@ -14,7 +14,18 @@ function MainGame({
  isAnimating,
  setIsAnimating,
  setError,
+ difficulty,
 }) {
+ const handleDifficultyClass = () => {
+  if (difficulty === 5) {
+   return "easy";
+  } else if (difficulty === 8) {
+   return "medium";
+  } else if (difficulty === 15) {
+   return "hard";
+  }
+ };
+
  const shufflePokemon = (newPokemonList) => {
   const shuffled = [...newPokemonList];
   for (let i = shuffled.length - 1; i > 0; i--) {
@@ -83,7 +94,7 @@ function MainGame({
 
  return (
   <main>
-   <section className="cards-list-wrapper">
+   <section className={`cards-list-wrapper ${handleDifficultyClass()}`}>
     {pokemonList.map((pokemon) => (
      <Card
       key={pokemon.id}

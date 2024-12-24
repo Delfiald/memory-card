@@ -48,6 +48,7 @@ function Game({
     isAnimating={isAnimating}
     setIsAnimating={setIsAnimating}
     setError={setError}
+    difficulty={difficulty}
    />
    {gameState && gameState !== "start" && (
     <Modal
