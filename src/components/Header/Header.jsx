@@ -11,8 +11,8 @@ function Header({ currentScore, bestScore, pokemonList, setOptionOpen }) {
     </aside>
     <h1 className="hero">Pokemon Memory Card</h1>
     <ul className="score-wrapper">
-     <li className="score">Score: {currentScore}</li>
-     <li className="best-score">Best Score: {bestScore}</li>
+     <li className="score">Score: {currentScore ? currentScore : 0}</li>
+     <li className="best-score">Best Score: {bestScore ? bestScore : 0}</li>
      <li className="total-score">
       {currentScore} / {pokemonList}
      </li>

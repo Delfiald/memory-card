@@ -18,6 +18,7 @@ function App() {
  const [pokemonTotal, setPokemonTotal] = useState(null);
  const [pokemonList, setPokemonList] = useState([]);
  const [currentScore, setCurrentScore] = useState(0);
+ const [bestScore, setBestScore] = useState(0);
  const [isAnimating, setIsAnimating] = useState(false);
  const [isSprite, setIsSprite] = useState(false);
  const [collectedOnly, setCollectedOnly] = useState(false);
@@ -67,7 +68,6 @@ function App() {
  };
 
  const initializeTotalPokemon = useCallback(() => {
-  console.log(pokemonTotal);
   if (!pokemonTotal) {
    const { getTotalPokemon } = fetchPokemonData(setError, setLoading);
    getTotalPokemon(setPokemonTotal);
@@ -92,9 +92,11 @@ function App() {
  }, [isAnimating]);
 
  useEffect(() => {
+  const savedScore = getItem("bestScore", setError);
   const savedData = getItem("savedPokemon", setError);
-  if (savedData) {
+  if (savedData || savedScore) {
    setSavedCard(savedData);
+   setBestScore(savedScore);
   }
  }, []);
 
@@ -147,6 +149,9 @@ function App() {
         gameState={gameState}
         setGameState={setGameState}
         handleStart={handleStart}
+        setSavedCard={setSavedCard}
+        setBestScore={setBestScore}
+        setError={setError}
        />
       );
      case "difficulty":
@@ -166,6 +171,8 @@ function App() {
         setSavedCard={setSavedCard}
         currentScore={currentScore}
         setCurrentScore={setCurrentScore}
+        bestScore={bestScore}
+        setBestScore={setBestScore}
         handleStart={handleStart}
         handleReturn={handleReturn}
         isAnimating={isAnimating}

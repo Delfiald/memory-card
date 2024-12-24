@@ -18,4 +18,12 @@ const getItem = (key, setError) => {
  }
 };
 
-export { setItem, getItem };
+const removeItem = (key, setError) => {
+ try {
+  localStorage.removeItem(key);
+ } catch (error) {
+  setError("Failed to remove item from localStorage:", error);
+ }
+};
+
+export { setItem, getItem, removeItem };

@@ -53,7 +53,13 @@ function MainGame({
 
  const handleScore = () => {
   setCurrentScore((prevScore) => prevScore + 1);
-  setBestScore((prevBestScore) => Math.max(prevBestScore, currentScore + 1));
+  setBestScore((prevBestScore) => {
+   const bestScore = Math.max(prevBestScore, currentScore + 1);
+
+   setItem("bestScore", bestScore, setError);
+
+   return bestScore;
+  });
  };
 
  const handleClickedCard = async (id) => {
