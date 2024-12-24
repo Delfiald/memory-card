@@ -6,6 +6,7 @@ import Difficulty from "./components/Difficulty/Difficulty";
 import Collections from "./pages/Collections";
 import StateDisplay from "./components/StateDisplay/StateDisplay";
 import Credits from "./pages/Credits";
+import { getItem } from "./utils/localStorage";
 
 function App() {
  const [gameState, setGameState] = useState(null);
@@ -91,6 +92,13 @@ function App() {
  }, [isAnimating]);
 
  useEffect(() => {
+  const savedData = getItem("savedPokemon", setError);
+  if (savedData) {
+   setSavedCard(savedData);
+  }
+ }, []);
+
+ useEffect(() => {
   initializeTotalPokemon();
  }, [initializeTotalPokemon]);
 
@@ -162,6 +170,7 @@ function App() {
         handleReturn={handleReturn}
         isAnimating={isAnimating}
         setIsAnimating={setIsAnimating}
+        setError={setError}
        />
       );
      case "collections":
