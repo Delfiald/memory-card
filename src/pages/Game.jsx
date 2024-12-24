@@ -14,12 +14,14 @@ function Game({
  setSavedCard,
  currentScore,
  setCurrentScore,
+ bestScore,
+ setBestScore,
  handleStart,
  handleReturn,
  isAnimating,
  setIsAnimating,
+ setError,
 }) {
- const [bestScore, setBestScore] = useState(0);
  const [optionOpen, setOptionOpen] = useState(false);
 
  return (
@@ -41,6 +43,7 @@ function Game({
     setSavedCard={setSavedCard}
     isAnimating={isAnimating}
     setIsAnimating={setIsAnimating}
+    setError={setError}
    />
    {gameState && gameState !== "start" && (
     <Modal

@@ -6,6 +6,7 @@ import Difficulty from "./components/Difficulty/Difficulty";
 import Collections from "./pages/Collections";
 import StateDisplay from "./components/StateDisplay/StateDisplay";
 import Credits from "./pages/Credits";
+import { getItem } from "./utils/localStorage";
 
 function App() {
  const [gameState, setGameState] = useState(null);
@@ -17,6 +18,7 @@ function App() {
  const [pokemonTotal, setPokemonTotal] = useState(null);
  const [pokemonList, setPokemonList] = useState([]);
  const [currentScore, setCurrentScore] = useState(0);
+ const [bestScore, setBestScore] = useState(0);
  const [isAnimating, setIsAnimating] = useState(false);
  const [isSprite, setIsSprite] = useState(false);
  const [collectedOnly, setCollectedOnly] = useState(false);
@@ -66,7 +68,6 @@ function App() {
  };
 
  const initializeTotalPokemon = useCallback(() => {
-  console.log(pokemonTotal);
   if (!pokemonTotal) {
    const { getTotalPokemon } = fetchPokemonData(setError, setLoading);
    getTotalPokemon(setPokemonTotal);
@@ -89,6 +90,15 @@ function App() {
    card.className = `card ${isAnimating ? "backside" : ""}`;
   });
  }, [isAnimating]);
+
+ useEffect(() => {
+  const savedScore = getItem("bestScore", setError);
+  const savedData = getItem("savedPokemon", setError);
+  if (savedData || savedScore) {
+   setSavedCard(savedData);
+   setBestScore(savedScore);
+  }
+ }, []);
 
  useEffect(() => {
   initializeTotalPokemon();
@@ -139,6 +149,9 @@ function App() {
         gameState={gameState}
         setGameState={setGameState}
         handleStart={handleStart}
+        setSavedCard={setSavedCard}
+        setBestScore={setBestScore}
+        setError={setError}
        />
       );
      case "difficulty":
@@ -158,10 +171,13 @@ function App() {
         setSavedCard={setSavedCard}
         currentScore={currentScore}
         setCurrentScore={setCurrentScore}
+        bestScore={bestScore}
+        setBestScore={setBestScore}
         handleStart={handleStart}
         handleReturn={handleReturn}
         isAnimating={isAnimating}
         setIsAnimating={setIsAnimating}
+        setError={setError}
        />
       );
      case "collections":

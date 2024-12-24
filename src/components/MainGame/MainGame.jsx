@@ -1,5 +1,6 @@
 import "./mainGame.css";
 import Card from "../Card/Card";
+import { setItem } from "../../utils/localStorage";
 
 function MainGame({
  gameState,
@@ -12,6 +13,7 @@ function MainGame({
  setSavedCard,
  isAnimating,
  setIsAnimating,
+ setError,
 }) {
  const shufflePokemon = (newPokemonList) => {
   const shuffled = [...newPokemonList];
@@ -29,7 +31,11 @@ function MainGame({
    if (isPokemonSaved) return prevState;
 
    const newPokemon = pokemonList.find((pokemon) => pokemon.id === id);
-   return [...prevState, newPokemon].sort((a, b) => a.id - b.id);
+   const updatedList = [...prevState, newPokemon].sort((a, b) => a.id - b.id);
+
+   setItem("savedPokemon", updatedList, setError);
+
+   return updatedList;
   });
  };
 
@@ -47,7 +53,13 @@ function MainGame({
 
  const handleScore = () => {
   setCurrentScore((prevScore) => prevScore + 1);
-  setBestScore((prevBestScore) => Math.max(prevBestScore, currentScore + 1));
+  setBestScore((prevBestScore) => {
+   const bestScore = Math.max(prevBestScore, currentScore + 1);
+
+   setItem("bestScore", bestScore, setError);
+
+   return bestScore;
+  });
  };
 
  const handleClickedCard = async (id) => {
