@@ -5,6 +5,7 @@ import fetchPokemonData from "./hooks/fetchPokemonData";
 import Difficulty from "./components/Difficulty/Difficulty";
 import Collections from "./pages/Collections";
 import StateDisplay from "./components/StateDisplay/StateDisplay";
+import Credits from "./pages/Credits";
 
 function App() {
  const [gameState, setGameState] = useState(null);
@@ -177,6 +178,8 @@ function App() {
         setLoading={setLoading}
        />
       );
+     case "credits":
+      return <Credits handleReturn={handleReturn} />;
      default:
       return null;
     }
