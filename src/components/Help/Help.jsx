@@ -114,7 +114,7 @@ function Help({ gameState, setHelpOpen }) {
    <div className="help-wrapper">
     <div className="help-container">
      {(() => {
-      switch (gameState) {
+      switch (gameState.state) {
        case "collections":
         return <CollectionsHelp setHelpOpen={setHelpOpen} />;
        case "start":

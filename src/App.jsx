@@ -1,31 +1,38 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import Game from "./pages/Game";
 import Home from "./pages/Home";
 import fetchPokemonData from "./hooks/fetchPokemonData";
 import Difficulty from "./components/Difficulty/Difficulty";
 import Collections from "./pages/Collections";
 import StateDisplay from "./components/StateDisplay/StateDisplay";
-import Credits from "./pages/Credits";
 import { getItem } from "./utils/localStorage";
 import { nameFormatter, adjustFontSize } from "./utils/nameFormatter";
 
 function App() {
- const [gameState, setGameState] = useState(null);
- const [difficulty, setDifficulty] = useState(null);
+ //  const [gameState, setGameState] = useState(null);
+ const [gameState, setGameState] = useState({
+  currentScore: 0,
+  bestScore: 0,
+  difficulty: null,
+  state: null,
+ });
+ //  const [currentScore, setCurrentScore] = useState(0);
+ // const [bestScore, setBestScore] = useState(0);
+ //  const [difficulty, setDifficulty] = useState(null);
  const [savedCard, setSavedCard] = useState([]);
  const [error, setError] = useState(null);
  const [loading, setLoading] = useState(false);
  const [isFetching, setIsFetching] = useState(false);
  const [pokemonTotal] = useState(1025);
  const [pokemonList, setPokemonList] = useState([]);
- const [currentScore, setCurrentScore] = useState(0);
- const [bestScore, setBestScore] = useState(0);
  const [isAnimating, setIsAnimating] = useState(false);
  const [isSprite, setIsSprite] = useState(false);
  const [collectedOnly, setCollectedOnly] = useState(false);
  const [helpOpen, setHelpOpen] = useState(false);
+ const [flavorText, setFlavorText] = useState(null);
 
- const handlePokemonList = (data) => {
+ //  Handle PokemonList
+ const addPokemonList = (data) => {
   const newPokemon = {
    id: data.id,
    pokemonImage: {
@@ -55,19 +62,27 @@ function App() {
   setPokemonList((prevPokemonList) => [...prevPokemonList, newPokemon]);
  };
 
- const handleStart = (difficultyValue = null) => {
-  if (isFetching) return;
-  const resolvedDifficulty = difficultyValue || difficulty;
-
-  if (difficultyValue) {
-   setDifficulty(difficultyValue);
-  }
-
-  setGameState("start");
+ const resetGameState = () => {
   setPokemonList([]);
-  setCurrentScore(0);
-
+  setGameState((prevState) => ({
+   ...prevState,
+   currentScore: 0,
+  }));
   setIsAnimating(true);
+ };
+
+ //  Handle Start / Restart
+ const handleStart = (difficultyValue = undefined) => {
+  if (isFetching) return;
+  const resolvedDifficulty = difficultyValue || gameState.difficulty;
+
+  resetGameState();
+
+  setGameState((prevState) => ({
+   ...prevState,
+   difficulty: difficultyValue ? difficultyValue : prevState.difficulty,
+   state: "start",
+  }));
 
   setTimeout(() => {
    setIsAnimating(false);
@@ -76,63 +91,158 @@ function App() {
   handleFetch(resolvedDifficulty);
  };
 
- const checkGameCompletion = useCallback(() => {
-  adjustFontSize();
-  if (pokemonList.length > 0) {
-   const isFinished = pokemonList.every((pokemon) => pokemon.isClicked);
-   if (isFinished) {
-    setGameState("finished");
-    setIsAnimating(true);
-   }
-  }
- }, [pokemonList]);
-
- useEffect(() => {
-  const allCards = [...document.querySelectorAll(".card")];
-  allCards.map((card) => {
-   card.className = `card ${isAnimating ? "backside" : ""}`;
-  });
- }, [isAnimating]);
-
- useEffect(() => {
-  const savedScore = getItem("bestScore", setError);
-  const savedData = getItem("savedPokemon", setError);
-  if (savedData || savedScore) {
-   setSavedCard(savedData);
-   setBestScore(savedScore);
-  }
- }, []);
-
- useEffect(() => {
-  checkGameCompletion();
- }, [checkGameCompletion]);
-
+ //  Handle Return to Home
  const handleReturn = () => {
-  setDifficulty(null);
-  setGameState(null);
-  setPokemonList([]);
-  setCurrentScore(0);
+  setGameState((prevState) => ({
+   ...prevState,
+   state: null,
+  }));
+
+  resetGameState();
 
   if (error) {
    setError(null);
   }
  };
 
- const handleFetch = async (difficultyValue) => {
+ //  Fetching Random Pokemon
+ const handleFetch = async (difficultyValue, pokemon = null) => {
   if (isFetching) return;
   setIsFetching(true);
-  const resolvedDifficulty = difficultyValue || difficulty;
 
-  const { getRandomPokemon } = fetchPokemonData(setError, setLoading);
-  const pokemonData = await getRandomPokemon(
-   resolvedDifficulty,
-   pokemonTotal,
-   setIsFetching
-  );
+  const resolvedDifficulty = difficultyValue || gameState.difficulty;
 
-  pokemonData.map((data) => {
-   handlePokemonList(data);
+  try {
+   if (pokemon) {
+    const { getDetailPokemon } = fetchPokemonData(setError, setLoading);
+
+    const pokemonData = await getDetailPokemon(pokemon.pokemonSpecies);
+    const flavorTextEntry = pokemonData.flavor_text_entries.find(
+     (entry) => entry.language.name === "en"
+    );
+
+    if (flavorTextEntry) {
+     const cleanedText = flavorTextEntry.flavor_text.replace(/\f/g, " ");
+     setFlavorText(cleanedText);
+    } else {
+     setFlavorText("No flavor text available");
+    }
+   } else {
+    const { getRandomPokemon } = fetchPokemonData(setError, setLoading);
+    const pokemonData = await getRandomPokemon(
+     resolvedDifficulty,
+     pokemonTotal,
+     setIsFetching
+    );
+
+    pokemonData.forEach((data) => {
+     addPokemonList(data);
+    });
+   }
+  } catch (error) {
+   setError(error);
+  } finally {
+   setIsFetching(false);
+  }
+ };
+
+ //  Use Effect
+ useEffect(() => {
+  const savedScore = getItem("bestScore", setError);
+  const savedData = getItem("savedPokemon", setError);
+  if (savedData && Array.isArray(savedData)) {
+   setSavedCard(savedData);
+  }
+  if (typeof savedScore === "number") {
+   setGameState((prevState) => ({
+    ...prevState,
+    bestScore: savedScore,
+   }));
+  }
+ }, []);
+
+ useEffect(() => {
+  const controller = new AbortController();
+  const allCards = [...document.querySelectorAll(".card")];
+  allCards.forEach((card) => {
+   card.className = `card ${isAnimating ? "backside" : ""}`;
   });
+
+  return () => {
+   controller.abort();
+  };
+ }, [isAnimating]);
+
+ useEffect(() => {
+  adjustFontSize();
+  if (pokemonList.length > 0) {
+   const allClicked = pokemonList.every((pokemon) => pokemon.isClicked);
+   if (allClicked) {
+    setGameState((prevState) => ({
+     ...prevState,
+     state: "finished",
+    }));
+    setIsAnimating(true);
+   }
+  }
+ }, [pokemonList]);
+
+ // Component Renderer
+ const renderGameState = () => {
+  switch (gameState.state) {
+   case null:
+    return (
+     <Home
+      gameState={gameState}
+      setGameState={setGameState}
+      handleStart={handleStart}
+      setSavedCard={setSavedCard}
+      setError={setError}
+     />
+    );
+   case "difficulty":
+    return <Difficulty handleStart={handleStart} handleReturn={handleReturn} />;
+   case "start":
+   case "ended":
+   case "finished":
+    return (
+     <Game
+      gameState={gameState}
+      setGameState={setGameState}
+      pokemonList={pokemonList}
+      setPokemonList={setPokemonList}
+      setSavedCard={setSavedCard}
+      handleStart={handleStart}
+      handleReturn={handleReturn}
+      isAnimating={isAnimating}
+      setIsAnimating={setIsAnimating}
+      setError={setError}
+      helpOpen={helpOpen}
+      setHelpOpen={setHelpOpen}
+     />
+    );
+   case "collections":
+    return (
+     <Collections
+      savedCard={savedCard}
+      pokemonTotal={pokemonTotal}
+      handleReturn={handleReturn}
+      setIsSprite={setIsSprite}
+      isSprite={isSprite}
+      collectedOnly={collectedOnly}
+      setCollectedOnly={setCollectedOnly}
+      setError={setError}
+      setLoading={setLoading}
+      gameState={gameState}
+      helpOpen={helpOpen}
+      setHelpOpen={setHelpOpen}
+      handleFetch={handleFetch}
+      flavorText={flavorText}
+     />
+    );
+   default:
+    return null;
+  }
  };
 
  return (
@@ -140,70 +250,7 @@ function App() {
    {(loading || error) && (
     <StateDisplay loading={loading} error={error} handleReturn={handleReturn} />
    )}
-   {(() => {
-    switch (gameState) {
-     case null:
-      return (
-       <Home
-        gameState={gameState}
-        setGameState={setGameState}
-        handleStart={handleStart}
-        setSavedCard={setSavedCard}
-        setBestScore={setBestScore}
-        setError={setError}
-       />
-      );
-     case "difficulty":
-      return (
-       <Difficulty handleStart={handleStart} handleReturn={handleReturn} />
-      );
-     case "start":
-     case "ended":
-     case "finished":
-      return (
-       <Game
-        gameState={gameState}
-        setGameState={setGameState}
-        difficulty={difficulty}
-        pokemonList={pokemonList}
-        setPokemonList={setPokemonList}
-        setSavedCard={setSavedCard}
-        currentScore={currentScore}
-        setCurrentScore={setCurrentScore}
-        bestScore={bestScore}
-        setBestScore={setBestScore}
-        handleStart={handleStart}
-        handleReturn={handleReturn}
-        isAnimating={isAnimating}
-        setIsAnimating={setIsAnimating}
-        setError={setError}
-        helpOpen={helpOpen}
-        setHelpOpen={setHelpOpen}
-       />
-      );
-     case "collections":
-      return (
-       <Collections
-        savedCard={savedCard}
-        pokemonTotal={pokemonTotal}
-        handleReturn={handleReturn}
-        setIsSprite={setIsSprite}
-        isSprite={isSprite}
-        collectedOnly={collectedOnly}
-        setCollectedOnly={setCollectedOnly}
-        setError={setError}
-        setLoading={setLoading}
-        gameState={gameState}
-        helpOpen={helpOpen}
-        setHelpOpen={setHelpOpen}
-       />
-      );
-     case "credits":
-      return <Credits handleReturn={handleReturn} />;
-     default:
-      return null;
-    }
-   })()}
+   {renderGameState()}
   </>
  );
 }

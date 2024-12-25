@@ -46,26 +46,20 @@ function GameOver({ currentScore, handleStart, handleReturn }) {
  );
 }
 
-function Modal({
- gameState,
- currentScore,
- handleStart,
- difficulty,
- handleReturn,
-}) {
+function Modal({ gameState, handleStart, handleReturn }) {
  return (
   <section className="modal">
    <div className="modal-wrapper">
-    {gameState === "finished" ? (
+    {gameState.state === "finished" ? (
      <GameFinish
-      currentScore={currentScore}
+      currentScore={gameState.currentScore}
       handleStart={handleStart}
-      difficulty={difficulty}
+      difficulty={gameState.difficulty}
       handleReturn={handleReturn}
      />
     ) : (
      <GameOver
-      currentScore={currentScore}
+      currentScore={gameState.currentScore}
       handleStart={handleStart}
       handleReturn={handleReturn}
      />
