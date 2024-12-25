@@ -5,7 +5,6 @@ import fetchPokemonData from "./hooks/fetchPokemonData";
 import Difficulty from "./components/Difficulty/Difficulty";
 import Collections from "./pages/Collections";
 import StateDisplay from "./components/StateDisplay/StateDisplay";
-import Credits from "./pages/Credits";
 import { getItem } from "./utils/localStorage";
 import { nameFormatter, adjustFontSize } from "./utils/nameFormatter";
 
@@ -241,8 +240,6 @@ function App() {
       flavorText={flavorText}
      />
     );
-   case "credits":
-    return <Credits handleReturn={handleReturn} />;
    default:
     return null;
   }

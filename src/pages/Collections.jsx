@@ -92,8 +92,9 @@ function Collections({
     handlePokemonPerPage={handlePokemonPerPage}
     handleShowCollected={handleShowCollected}
    />
-   <div className="cards-list-wrapper">{renderPokemonCards()}</div>
-   {helpOpen && <Help gameState={gameState} setHelpOpen={setHelpOpen} />}
+   <main>
+    <div className="cards-list-wrapper">{renderPokemonCards()}</div>
+   </main>
    {pokemonDetails && (
     <PokemonDetails
      pokemonDetails={pokemonDetails}
@@ -102,6 +103,7 @@ function Collections({
      flavorText={flavorText}
     />
    )}
+   {helpOpen && <Help gameState={gameState} setHelpOpen={setHelpOpen} />}
    <CollectionsFooter
     pokemonTotal={collectedOnly ? savedCard.length : pokemonTotal}
     itemPerPage={itemPerPage}
