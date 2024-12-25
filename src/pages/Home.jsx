@@ -5,12 +5,15 @@ import MainHome from "../components/MainGame/MainHome";
 import Reset from "../components/Reset/Reset";
 import Credits from "../components/Credits/Credits";
 
-function Home({ setGameState, setSavedCard, setBestScore, setError }) {
+function Home({ setGameState, setSavedCard, setError }) {
  const [resetOpen, setResetOpen] = useState(false);
  const [creditsOpen, setCreditsOpen] = useState(false);
  const handleReset = () => {
   setSavedCard([]);
-  setBestScore(0);
+  setGameState((prevState) => ({
+   ...prevState,
+   bestScore: 0,
+  }));
   removeItem("savedPokemon", setError);
   removeItem("bestScore", setError);
   setResetOpen(false);

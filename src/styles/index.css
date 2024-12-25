@@ -529,3 +529,13 @@ ol {
   overflow: auto;
  }
 }
+
+@media (max-width: 400px) and (max-height: 700px) {
+ #collections .pokemon-details-container > .pokemon-information {
+  transform: translateY(-2.5%);
+ }
+
+ #collections .pokemon-details .pokemon-details-container.open-details .card {
+  transform: scale(0.45) !important;
+ }
+}

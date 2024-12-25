@@ -9,16 +9,12 @@ import { getItem } from "./utils/localStorage";
 import { nameFormatter, adjustFontSize } from "./utils/nameFormatter";
 
 function App() {
- //  const [gameState, setGameState] = useState(null);
  const [gameState, setGameState] = useState({
   currentScore: 0,
   bestScore: 0,
   difficulty: null,
   state: null,
  });
- //  const [currentScore, setCurrentScore] = useState(0);
- // const [bestScore, setBestScore] = useState(0);
- //  const [difficulty, setDifficulty] = useState(null);
  const [savedCard, setSavedCard] = useState([]);
  const [error, setError] = useState(null);
  const [loading, setLoading] = useState(false);
@@ -193,7 +189,6 @@ function App() {
    case null:
     return (
      <Home
-      gameState={gameState}
       setGameState={setGameState}
       handleStart={handleStart}
       setSavedCard={setSavedCard}
