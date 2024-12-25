@@ -9,6 +9,7 @@ function PokemonDetails({
  flavorText,
 }) {
  const [audio] = useState(new Audio(pokemonDetails.pokemonCries));
+ const [openDetails, setOpenDetails] = useState(false);
 
  const playPokemonCries = () => {
   audio.currentTime = 0;
@@ -19,7 +20,9 @@ function PokemonDetails({
  return (
   <section className="pokemon-details">
    <div className="pokemon-details-wrapper">
-    <div className="pokemon-details-container">
+    <div
+     className={`pokemon-details-container ${openDetails && "open-details"}`}
+    >
      <Card
       pokemonId={pokemonDetails.id}
       pokemonName={pokemonDetails.pokemonName}
@@ -31,6 +34,16 @@ function PokemonDetails({
       }
      />
      <div className="pokemon-information">
+      <button
+       className="open-details-button"
+       onClick={() => setOpenDetails(!openDetails)}
+      >
+       {openDetails ? (
+        <i className="fas fa-chevron-down"></i>
+       ) : (
+        <i className="fas fa-chevron-up"></i>
+       )}
+      </button>
       <div className="pokemon-name">{pokemonDetails.pokemonName}</div>
       <div className="pokemon-descriptions">
        <div className="pokemon-basic-information">

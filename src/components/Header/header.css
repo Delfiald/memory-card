@@ -35,6 +35,7 @@ header {
  justify-content: center;
  border-radius: 50%;
  box-shadow: 2px 2px 5px var(--dark-color-500);
+ z-index: 2;
 }
 
 header {
@@ -120,7 +121,7 @@ header .total-score {
 }
 
 /* Collections Header */
-#collections h2 {
+#collections header h2 {
  font-size: 3rem;
 }
 
@@ -137,7 +138,7 @@ header .total-score {
 #collections .collections-header {
  padding: 1rem;
  display: grid;
- grid-template-columns: 0.25fr 1fr 0.25fr;
+ grid-template-columns: 200px 1fr 200px;
  align-items: center;
  justify-content: space-between;
  gap: 1rem;
@@ -145,6 +146,7 @@ header .total-score {
  border: 1px solid var(--dark-color-600);
  border-radius: 15px;
  box-shadow: 3px 5px 10px var(--dark-color-600);
+ text-align: center;
 }
 
 #collections .return-button {

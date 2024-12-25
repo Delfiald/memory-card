@@ -50,6 +50,17 @@
  gap: 1rem;
 }
 
+#collections
+ .pokemon-details-container
+ > .pokemon-information
+ .open-details-button {
+ display: none;
+ background: transparent;
+ box-shadow: none;
+ padding: 0;
+ font-size: 1.5rem;
+}
+
 #collections .pokemon-details .card-wrapper .card-information {
  flex: 0 0 0.35;
  grid-template-rows: auto;
