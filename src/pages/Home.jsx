@@ -26,6 +26,44 @@ function Reset({ handleReset, setResetOpen }) {
  );
 }
 
+function HomeHeader() {
+ return (
+  <header>
+   <h1>
+    Pokémon
+    <span></span>
+   </h1>
+   <h2>Memory Card</h2>
+  </header>
+ );
+}
+
+function HomeMain({ handleDifficulty, setResetOpen }) {
+ return (
+  <main className="home-action">
+   <button onClick={() => handleDifficulty("difficulty")}>
+    <div className="icon">
+     <img src="./menu/card.png" alt="" />
+    </div>
+    <div>Start Game</div>
+   </button>
+   <button onClick={() => handleDifficulty("collections")}>
+    <div className="icon">
+     <img src="./menu/pokedex.png" alt="" />
+    </div>
+    <div>Collections</div>
+   </button>
+   <button onClick={() => handleDifficulty("credits")}>
+    <div className="icon">
+     <img src="./menu/pokestar.png" alt="" />
+    </div>
+    <div>Credits</div>
+   </button>
+   <button onClick={() => setResetOpen(true)}>Reset</button>
+  </main>
+ );
+}
+
 function Home({ setGameState, setSavedCard, setBestScore, setError }) {
  const [resetOpen, setResetOpen] = useState(false);
  const handleReset = () => {
@@ -36,36 +74,17 @@ function Home({ setGameState, setSavedCard, setBestScore, setError }) {
   setResetOpen(false);
  };
 
+ const handleDifficulty = (state) => {
+  setGameState((prevState) => ({
+   ...prevState,
+   state: state,
+  }));
+ };
+
  return (
   <section id="home">
-   <header>
-    <h1>
-     Pokémon
-     <span></span>
-    </h1>
-    <h2>Memory Card</h2>
-   </header>
-   <div className="home-action">
-    <button onClick={() => setGameState("difficulty")}>
-     <div className="icon">
-      <img src="./menu/card.png" alt="" />
-     </div>
-     <div>Start Game</div>
-    </button>
-    <button onClick={() => setGameState("collections")}>
-     <div className="icon">
-      <img src="./menu/pokedex.png" alt="" />
-     </div>
-     <div>Collections</div>
-    </button>
-    <button onClick={() => setGameState("credits")}>
-     <div className="icon">
-      <img src="./menu/pokestar.png" alt="" />
-     </div>
-     <div>Credits</div>
-    </button>
-    <button onClick={() => setResetOpen(true)}>Reset</button>
-   </div>
+   <HomeHeader />
+   <HomeMain handleDifficulty={handleDifficulty} setResetOpen={setResetOpen} />
    {resetOpen && (
     <Reset handleReset={handleReset} setResetOpen={setResetOpen} />
    )}

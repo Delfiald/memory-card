@@ -9,37 +9,6 @@
  padding: 1rem;
 }
 
-#home header {
- gap: 0;
- text-transform: uppercase;
-}
-
-#home header h1 {
- font-size: 3.5rem;
- color: #ffcc00;
- -webkit-text-stroke: 2px #003a70;
- font-weight: bolder;
- line-height: 1.2;
- text-align: center;
-}
-
-#home header h1 > span {
- display: inline-block;
- width: 15px;
- height: 15px;
- background: #ffcc00;
- border: 2px solid #003a70;
- border-radius: 50%;
- margin-left: 5px;
-}
-
-#home header h2 {
- font-size: 2rem;
- color: #003a70;
- font-weight: bold;
- -webkit-text-stroke: 1px var(--light-color);
-}
-
 #home .home-action {
  max-width: 500px;
  width: 100%;

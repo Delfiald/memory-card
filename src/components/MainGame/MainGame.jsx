@@ -5,23 +5,19 @@ import { setItem } from "../../utils/localStorage";
 function MainGame({
  gameState,
  setGameState,
- currentScore,
- setCurrentScore,
- setBestScore,
  pokemonList,
  setPokemonList,
  setSavedCard,
  isAnimating,
  setIsAnimating,
  setError,
- difficulty,
 }) {
  const handleDifficultyClass = () => {
-  if (difficulty === 5) {
+  if (gameState.difficulty === 5) {
    return "easy";
-  } else if (difficulty === 8) {
+  } else if (gameState.difficulty === 8) {
    return "medium";
-  } else if (difficulty === 15) {
+  } else if (gameState.difficulty === 15) {
    return "hard";
   }
  };
@@ -63,18 +59,20 @@ function MainGame({
  };
 
  const handleScore = () => {
-  setCurrentScore((prevScore) => prevScore + 1);
-  setBestScore((prevBestScore) => {
-   const bestScore = Math.max(prevBestScore, currentScore + 1);
+  setGameState((prevState) => {
+   const bestScore = Math.max(prevState.bestScore, prevState.currentScore + 1);
 
    setItem("bestScore", bestScore, setError);
-
-   return bestScore;
+   return {
+    ...prevState,
+    currentScore: prevState.currentScore + 1,
+    bestScore: bestScore,
+   };
   });
  };
 
  const handleClickedCard = async (id) => {
-  if (gameState !== "start") return;
+  if (gameState.state !== "start") return;
   setIsAnimating(true);
 
   if (!pokemonList.some((pokemon) => pokemon.id === id && pokemon.isClicked)) {
@@ -88,7 +86,10 @@ function MainGame({
 
    handlePokemonList(id);
   } else {
-   setGameState("ended");
+   setGameState((prevState) => ({
+    ...prevState,
+    state: "ended",
+   }));
   }
  };
 
@@ -98,14 +99,13 @@ function MainGame({
     {pokemonList.map((pokemon) => (
      <Card
       key={pokemon.id}
-      setCurrentScore={setCurrentScore}
       pokemonId={pokemon.id}
       pokemonName={pokemon.pokemonName}
       pokemonType={pokemon.type}
       pokemonImage={pokemon.pokemonImage.artwork}
       handleClickedCard={handleClickedCard}
       isAnimating={isAnimating}
-      gameState={gameState}
+      gameState={gameState.state}
      />
     ))}
    </section>

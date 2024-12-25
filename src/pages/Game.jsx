@@ -9,14 +9,9 @@ import Help from "../components/Help/Help";
 function Game({
  gameState,
  setGameState,
- difficulty,
  pokemonList,
  setPokemonList,
  setSavedCard,
- currentScore,
- setCurrentScore,
- bestScore,
- setBestScore,
  handleStart,
  handleReturn,
  isAnimating,
@@ -30,8 +25,8 @@ function Game({
  return (
   <section id="game">
    <Header
-    currentScore={currentScore}
-    bestScore={bestScore}
+    currentScore={gameState.currentScore}
+    bestScore={gameState.bestScore}
     pokemonList={pokemonList.length}
     setOptionOpen={setOptionOpen}
     setHelpOpen={setHelpOpen}
@@ -39,23 +34,19 @@ function Game({
    <MainGame
     gameState={gameState}
     setGameState={setGameState}
-    currentScore={currentScore}
-    setCurrentScore={setCurrentScore}
-    setBestScore={setBestScore}
     pokemonList={pokemonList}
     setPokemonList={setPokemonList}
     setSavedCard={setSavedCard}
     isAnimating={isAnimating}
     setIsAnimating={setIsAnimating}
     setError={setError}
-    difficulty={difficulty}
    />
-   {gameState && gameState !== "start" && (
+   {gameState.state && gameState.state !== "start" && (
     <Modal
      gameState={gameState}
-     currentScore={currentScore}
+     currentScore={gameState.currentScore}
      handleStart={handleStart}
-     difficulty={difficulty}
+     difficulty={gameState.difficulty}
      handleReturn={handleReturn}
     />
    )}
