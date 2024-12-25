@@ -1,0 +1,84 @@
+footer {
+ position: relative;
+ padding: 1rem;
+ font-weight: 500;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ width: 100%;
+}
+
+footer .github-link {
+ position: absolute;
+ right: 1rem;
+ font-size: 2rem;
+}
+
+/* Collections Footer */
+#collections .collections-bottom {
+ position: relative;
+ width: 100%;
+ display: flex;
+ align-items: center;
+ justify-content: space-evenly;
+ gap: 1rem;
+}
+
+#collections .collections-bottom .arrow-button {
+ position: absolute;
+ width: inherit;
+ height: 100%;
+ display: grid;
+ grid-template-columns: repeat(2, 1fr);
+ align-items: center;
+ justify-content: center;
+ padding: 0 1rem;
+}
+
+#collections .collections-bottom .arrow-button > .prev-button {
+ grid-column: 1 / 2;
+ justify-self: start;
+}
+
+#collections .collections-bottom .arrow-button > .next-button {
+ grid-column: 2 / -1;
+ justify-self: end;
+}
+
+#collections .collections-bottom button {
+ width: 50px;
+ height: 50px;
+ border-radius: 50%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+#collections .collections-bottom .page-number-wrapper {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 0.5rem;
+}
+
+#collections .collections-bottom .page-number-wrapper > button {
+ position: relative;
+ box-shadow: none;
+}
+
+#collections .collections-bottom .page-number-wrapper > button.active {
+ box-shadow: 0px 0px 3px var(--dark-color-300);
+}
+
+#collections .collections-bottom .page-number-wrapper > button.active::before {
+ content: "";
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ width: calc(100% - 0.5rem);
+ height: calc(100% - 0.5rem);
+ border-radius: 50%;
+ border: 2px solid var(--dark-color-600);
+ box-shadow: 0px 0px 3px var(--dark-color-500);
+}

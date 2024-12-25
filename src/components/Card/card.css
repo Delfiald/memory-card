@@ -1,0 +1,334 @@
+.card {
+ aspect-ratio: 5 / 7;
+ border: 1px solid var(--dark-color-600);
+ padding: 0.65rem;
+ display: flex;
+ align-items: stretch;
+ justify-content: center;
+ gap: 1rem;
+ border-radius: 10px;
+ box-shadow: 1px 1px 7px var(--dark-color-600),
+  -1px -1px 7px var(--dark-color-600);
+ cursor: pointer;
+ will-change: transform;
+ transform-style: preserve-3d;
+ transition: 0.35s cubic-bezier(0.2, 0.8, 0.5, 1);
+ transform: perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1);
+ background: var(--light-color);
+}
+
+.card.backside {
+ transform: perspective(1000px) rotateX(0) rotateY(180deg) scale3d(1, 1, 1) !important;
+ transition: 0.5s cubic-bezier(0.2, 0.8, 0.5, 1);
+ pointer-events: none;
+}
+
+.card .card-wrapper {
+ width: 100%;
+ border: 1px solid var(--dark-color-600);
+ padding: 0.25rem;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ flex-direction: column;
+ gap: 0.5rem;
+ border-radius: 5px;
+ box-shadow: inset 1px 1px 3px var(--dark-color-500);
+ background: url("./noise.png") center center / cover no-repeat;
+}
+
+.card .card-wrapper .card-information {
+ width: 100%;
+ display: grid;
+ grid-template-columns: calc(100% - 2rem) min-content;
+ grid-template-rows: 26px;
+ align-items: center;
+ justify-content: space-between;
+}
+
+.card .pokemon-name {
+ white-space: nowrap;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ font-weight: 500;
+ align-self: center;
+ justify-self: start;
+ width: 100%;
+ filter: drop-shadow(0px 0px 3px var(--light-color-300));
+}
+
+.card .pokemon-type {
+ width: 1.5rem;
+ height: 1.5rem;
+ border: 1px solid var(--dark-color-600);
+ border-radius: 50%;
+ box-shadow: 1px 1px 5px var(--light-color), -1px -1px 5px var(--light-color);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+.card .pokemon-type img {
+ width: 100%;
+ height: 100%;
+ padding: 0.2rem;
+ object-fit: contain;
+ color: var(--dark-color-600);
+ border-radius: 50%;
+}
+
+.card .pokemon-image {
+ width: 100%;
+ flex: 1 0 auto;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ border-end-end-radius: 5px;
+ border-end-start-radius: 5px;
+ border: 3px solid var(--light-color);
+ border-bottom: 5px solid var(--light-color);
+ padding: 0.25rem;
+ box-shadow: 1px 1px 3px var(--dark-color-600),
+  inset 1px 1px 3px var(--dark-color-500);
+}
+
+.card .pokemon-image img {
+ width: 100%;
+ height: 100%;
+ object-fit: contain;
+ filter: drop-shadow(2px 3px 5px var(--dark-color-500));
+}
+
+.pokemon-details-container .card {
+ padding: 1rem;
+}
+
+.pokemon-details-container .card-wrapper {
+ padding: 0.5rem;
+ box-shadow: inset 5px 5px 5px var(--dark-color-500);
+}
+
+.pokemon-details-container .card .pokemon-image {
+ border: 5px solid var(--light-color);
+ border-bottom: 15px solid var(--light-color);
+ box-shadow: 3px 3px 5px var(--dark-color-600),
+  inset 3px 3px 5px var(--dark-color-500);
+}
+
+.pokemon-details-container .card .pokemon-image img {
+ filter: drop-shadow(4px 5px 8px var(--dark-color-500));
+}
+
+/* SVG */
+.wrapper {
+ width: 800px;
+ margin: auto auto;
+ display: grid;
+ grid-gap: 20px;
+ grid-template-columns: repeat(6, 1fr);
+ align-content: center;
+ align-items: center;
+}
+
+.icon {
+ border-radius: 100%;
+ height: 100px;
+ width: 100px;
+ margin: auto;
+ transition: 200ms all;
+}
+
+.icon:hover {
+ filter: saturate(200%);
+ transform: scale(1.1);
+ cursor: pointer;
+}
+
+.icon img {
+ height: 60%;
+ width: 60%;
+ margin: 20%;
+ object-fit: contain;
+}
+
+.bug {
+ background: var(--color-bug);
+ box-shadow: 0 0 10px var(--color-bug);
+}
+
+.dark {
+ background: var(--color-dark);
+ box-shadow: 0 0 10px var(--color-dark);
+}
+
+.dragon {
+ background: var(--color-dragon);
+ box-shadow: 0 0 10px var(--color-dragon);
+}
+
+.electric {
+ background: var(--color-electric);
+ box-shadow: 0 0 10px var(--color-electric);
+}
+
+.fire {
+ background: var(--color-fire);
+ box-shadow: 0 0 10px var(--color-fire);
+}
+
+.fairy {
+ background: var(--color-fairy);
+ box-shadow: 0 0 10px var(--color-fairy);
+}
+
+.fighting {
+ background: var(--color-fighting);
+ box-shadow: 0 0 10px var(--color-fighting);
+}
+
+.flying {
+ background: var(--color-flying);
+ box-shadow: 0 0 10px var(--color-flying);
+}
+
+.ghost {
+ background: var(--color-ghost);
+ box-shadow: 0 0 10px var(--color-ghost);
+}
+
+.grass {
+ background: var(--color-grass);
+ box-shadow: 0 0 10px var(--color-grass);
+}
+
+.ground {
+ background: var(--color-ground);
+ box-shadow: 0 0 10px var(--color-ground);
+}
+
+.ice {
+ background: var(--color-ice);
+ box-shadow: 0 0 10px var(--color-ice);
+}
+
+.normal {
+ background: var(--color-normal);
+ box-shadow: 0 0 10px var(--color-normal);
+}
+
+.poison {
+ background: var(--color-poison);
+ box-shadow: 0 0 10px var(--color-poison);
+}
+
+.psychic {
+ background: var(--color-psychic);
+ box-shadow: 0 0 10px var(--color-psychic);
+}
+
+.rock {
+ background: var(--color-rock);
+ box-shadow: 0 0 10px var(--color-rock);
+}
+
+.steel {
+ background: var(--color-steel);
+ box-shadow: 0 0 10px var(--color-steel);
+}
+
+.water {
+ background: var(--color-water);
+ box-shadow: 0 0 10px var(--color-water);
+}
+
+.card .card-wrapper.bug {
+ background-color: var(--card-bug);
+}
+
+.card .card-wrapper.dark {
+ background-color: var(--card-dark);
+}
+
+.card .card-wrapper.dragon {
+ background-color: var(--card-dragon);
+}
+
+.card .card-wrapper.electric {
+ background-color: var(--card-electric);
+}
+
+.card .card-wrapper.fairy {
+ background-color: var(--card-fairy);
+}
+
+.card .card-wrapper.fighting {
+ background-color: var(--card-fighting);
+}
+
+.card .card-wrapper.fire {
+ background-color: var(--card-fire);
+}
+
+.card .card-wrapper.flying {
+ background-color: var(--card-flying);
+}
+
+.card .card-wrapper.ghost {
+ background-color: var(--card-ghost);
+}
+
+.card .card-wrapper.grass {
+ background-color: var(--card-grass);
+}
+
+.card .card-wrapper.ground {
+ background-color: var(--card-ground);
+}
+
+.card .card-wrapper.ice {
+ background-color: var(--card-ice);
+}
+
+.card .card-wrapper.normal {
+ background-color: var(--card-normal);
+}
+
+.card .card-wrapper.poison {
+ background-color: var(--card-poison);
+}
+
+.card .card-wrapper.psychic {
+ background-color: var(--card-psychic);
+}
+
+.card .card-wrapper.rock {
+ background-color: var(--card-rock);
+}
+
+.card .card-wrapper.steel {
+ background-color: var(--card-steel);
+}
+
+.card .card-wrapper.water {
+ background-color: var(--card-water);
+}
+
+@keyframes card-show {
+ 0% {
+  transform: rotateY(180deg);
+ }
+
+ 100% {
+  transform: rotateY(0);
+ }
+}
+
+@keyframes card-hide {
+ 0% {
+  transform: rotateY(0);
+ }
+
+ 100% {
+  transform: rotateY(180deg);
+ }
+}
