@@ -7,7 +7,7 @@
 }
 
 .card.backside {
- background: #281886;
+ background: var(--card-backside);
 }
 
 .card-image {

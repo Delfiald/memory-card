@@ -14,7 +14,7 @@
  transform-style: preserve-3d;
  transition: 0.35s cubic-bezier(0.2, 0.8, 0.5, 1);
  transform: perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1);
- background: #fff;
+ background: var(--light-color);
 }
 
 .card.backside {
@@ -152,165 +152,165 @@
 }
 
 .bug {
- background: #92bc2c;
- box-shadow: 0 0 10px #92bc2c;
+ background: var(--color-bug);
+ box-shadow: 0 0 10px var(--color-bug);
 }
 
 .dark {
- background: #595761;
- box-shadow: 0 0 10px #595761;
+ background: var(--color-dark);
+ box-shadow: 0 0 10px var(--color-dark);
 }
 
 .dragon {
- background: #9b8026;
- box-shadow: 0 0 10px #9b8026;
+ background: var(--color-dragon);
+ box-shadow: 0 0 10px var(--color-dragon);
 }
 
 .electric {
- background: #e1c03b;
- box-shadow: 0 0 10px #e1c03b;
+ background: var(--color-electric);
+ box-shadow: 0 0 10px var(--color-electric);
 }
 
 .fire {
- background: #e43020;
- box-shadow: 0 0 10px #e43020;
+ background: var(--color-fire);
+ box-shadow: 0 0 10px var(--color-fire);
 }
 
 .fairy {
- background: #ab3662;
- box-shadow: 0 0 10px #ab3662;
+ background: var(--color-fairy);
+ box-shadow: 0 0 10px var(--color-fairy);
 }
 
 .fighting {
- background: #cf4d27;
- box-shadow: 0 0 10px #cf4d27;
+ background: var(--color-fighting);
+ box-shadow: 0 0 10px var(--color-fighting);
 }
 
 .flying {
- background: #a1bbec;
- box-shadow: 0 0 10px #a1bbec;
+ background: var(--color-flying);
+ box-shadow: 0 0 10px var(--color-flying);
 }
 
 .ghost {
- background: #5f6dbc;
- box-shadow: 0 0 10px #5f6dbc;
+ background: var(--color-ghost);
+ box-shadow: 0 0 10px var(--color-ghost);
 }
 
 .grass {
- background: #5fbd58;
- box-shadow: 0 0 10px #5fbd58;
+ background: var(--color-grass);
+ box-shadow: 0 0 10px var(--color-grass);
 }
 
 .ground {
- background: #da7c4d;
- box-shadow: 0 0 10px #da7c4d;
+ background: var(--color-ground);
+ box-shadow: 0 0 10px var(--color-ground);
 }
 
 .ice {
- background: #75d0c1;
- box-shadow: 0 0 10px #75d0c1;
+ background: var(--color-ice);
+ box-shadow: 0 0 10px var(--color-ice);
 }
 
 .normal {
- background: #a0a29f;
- box-shadow: 0 0 10px #a0a29f;
+ background: var(--color-normal);
+ box-shadow: 0 0 10px var(--color-normal);
 }
 
 .poison {
- background: #b763cf;
- box-shadow: 0 0 10px #b763cf;
+ background: var(--color-poison);
+ box-shadow: 0 0 10px var(--color-poison);
 }
 
 .psychic {
- background: #b76db3;
- box-shadow: 0 0 10px #b76db3;
+ background: var(--color-psychic);
+ box-shadow: 0 0 10px var(--color-psychic);
 }
 
 .rock {
- background: #b59d73;
- box-shadow: 0 0 10px #b59d73;
+ background: var(--color-rock);
+ box-shadow: 0 0 10px var(--color-rock);
 }
 
 .steel {
- background: #5695a3;
- box-shadow: 0 0 10px #5695a3;
+ background: var(--color-steel);
+ box-shadow: 0 0 10px var(--color-steel);
 }
 
 .water {
- background: #539ddf;
- box-shadow: 0 0 10px #539ddf;
+ background: var(--color-water);
+ box-shadow: 0 0 10px var(--color-water);
 }
 
 .card .card-wrapper.bug {
- background-color: #a4d14b; /* Bug */
+ background-color: var(--card-bug);
 }
 
 .card .card-wrapper.dark {
- background-color: #7a7a7a; /* Dark */
+ background-color: var(--card-dark);
 }
 
 .card .card-wrapper.dragon {
- background-color: #dbac39; /* Dragon */
+ background-color: var(--card-dragon);
 }
 
 .card .card-wrapper.electric {
- background-color: #fee000; /* Electric */
+ background-color: var(--card-electric);
 }
 
 .card .card-wrapper.fairy {
- background-color: #eb6ca5; /* Fairy */
+ background-color: var(--card-fairy);
 }
 
 .card .card-wrapper.fighting {
- background-color: #eb9038; /* Fighting */
+ background-color: var(--card-fighting);
 }
 
 .card .card-wrapper.fire {
- background-color: #ef6d40; /* Fire */
+ background-color: var(--card-fire);
 }
 
 .card .card-wrapper.flying {
- background-color: #a1bbec; /* Flying */
+ background-color: var(--card-flying);
 }
 
 .card .card-wrapper.ghost {
- background-color: #8a9bed; /* Ghost */
+ background-color: var(--card-ghost);
 }
 
 .card .card-wrapper.grass {
- background-color: #74c566; /* Grass */
+ background-color: var(--card-grass);
 }
 
 .card .card-wrapper.ground {
- background-color: #dc871c; /* Ground */
+ background-color: var(--card-ground);
 }
 
 .card .card-wrapper.ice {
- background-color: #8cd8d1; /* Ice */
+ background-color: var(--card-ice);
 }
 
 .card .card-wrapper.normal {
- background-color: #c2c6c2; /* Normal */
+ background-color: var(--card-normal);
 }
 
 .card .card-wrapper.poison {
- background-color: #d08ede; /* Poison */
+ background-color: var(--card-poison);
 }
 
 .card .card-wrapper.psychic {
- background-color: #d789ba; /* Psychic */
+ background-color: var(--card-psychic);
 }
 
 .card .card-wrapper.rock {
- background-color: #c9bb8a; /* Rock */
+ background-color: var(--card-rock);
 }
 
 .card .card-wrapper.steel {
- background-color: #6fa7b6; /* Steel */
+ background-color: var(--card-steel);
 }
 
 .card .card-wrapper.water {
- background-color: #76c6f4; /* Water */
+ background-color: var(--card-water);
 }
 
 @keyframes card-show {

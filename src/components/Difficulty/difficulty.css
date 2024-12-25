@@ -33,17 +33,17 @@
 }
 
 .difficulty .difficulty-wrapper .easy::before {
- --_border-color: #66ccff;
+ --_border-color: var(--color-water);
  border-color: var(--_border-color);
 }
 
 .difficulty .difficulty-wrapper .medium::before {
- --_border-color: #66cc66;
+ --_border-color: var(--color-grass);
  border-color: var(--_border-color);
 }
 
 .difficulty .difficulty-wrapper .hard::before {
- --_border-color: #ff6666;
+ --_border-color: var(--color-fire);
  border-color: var(--_border-color);
 }
 

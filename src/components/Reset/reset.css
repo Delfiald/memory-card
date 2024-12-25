@@ -55,7 +55,7 @@
 
 #home .reset-container .reset-text > div:nth-child(2) {
  font-weight: bold;
- color: red;
+ color: var(--color-fire);
 }
 
 #home .reset-container .reset-action {

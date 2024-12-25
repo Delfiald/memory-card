@@ -73,12 +73,12 @@
 }
 
 .option-wrapper .option-container .retry::before {
- --_border-color: #66cc66;
+ --_border-color: var(--color-grass);
  border-color: var(--_border-color);
 }
 
 .option-wrapper .option-container .return::before {
- --_border-color: #ff6666;
+ --_border-color: var(--color-fire);
  border-color: var(--_border-color);
 }
 

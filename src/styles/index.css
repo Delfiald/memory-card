@@ -10,12 +10,55 @@
 
 :root {
  --silver-color: #c0c0c0;
+ --title-color: #ffcc00;
+ --title-2-color: #003a70;
+
  --light-color: #fff;
  --light-color-300: #f4f4f4;
+
  --dark-color: #000;
  --dark-color-300: #333;
  --dark-color-500: #555;
  --dark-color-600: #ccc;
+
+ --color-bug: #92bc2c;
+ --color-dark: #595761;
+ --color-dragon: #9b8026;
+ --color-electric: #e1c03b;
+ --color-fire: #e43020;
+ --color-fairy: #ab3662;
+ --color-fighting: #cf4d27;
+ --color-flying: #a1bbec;
+ --color-ghost: #5f6dbc;
+ --color-grass: #5fbd58;
+ --color-ground: #da7c4d;
+ --color-ice: #75d0c1;
+ --color-normal: #a0a29f;
+ --color-poison: #b763cf;
+ --color-psychic: #b76db3;
+ --color-rock: #b59d73;
+ --color-steel: #5695a3;
+ --color-water: #539ddf;
+
+ --card-backside: #281886;
+ --card-bug: #a4d14b;
+ --card-dark: #7a7a7a;
+ --card-dragon: #dbac39;
+ --card-electric: #fee000;
+ --card-fairy: #eb6ca5;
+ --card-fighting: #eb9038;
+ --card-fire: #ef6d40;
+ --card-flying: #a1bbec;
+ --card-ghost: #8a9bed;
+ --card-grass: #74c566;
+ --card-ground: #dc871c;
+ --card-ice: #8cd8d1;
+ --card-normal: #c2c6c2;
+ --card-poison: #d08ede;
+ --card-psychic: #d789ba;
+ --card-rock: #c9bb8a;
+ --card-steel: #6fa7b6;
+ --card-water: #76c6f4;
 
  --transition-medium: 0.3s all ease-in-out;
 }
@@ -120,6 +163,10 @@ ol {
  gap: 1rem;
 }
 
+#home {
+ height: 100vh;
+}
+
 .cards-list-wrapper {
  display: grid;
  grid-template-columns: repeat(5, 180px);
@@ -193,7 +240,6 @@ ol {
 
 @media (max-width: 950px) and (orientation: landscape) {
  #home {
-  height: 100vh;
   gap: 0.5rem !important;
  }
 

@@ -82,7 +82,7 @@
  width: 15px;
  height: 15px;
  border-radius: 50%;
- background: yellow;
+ background: var(--color-electric);
  box-shadow: 0px 0px 5px var(--dark-color-500);
  display: flex;
  align-items: center;
