@@ -34,7 +34,7 @@
  gap: 0.5rem;
  border-radius: 5px;
  box-shadow: inset 1px 1px 3px var(--dark-color-500);
- background: url("./noise.png") center center / cover no-repeat;
+ background: url("/noise.png") center center / cover no-repeat;
 }
 
 .card .card-wrapper .card-information {
