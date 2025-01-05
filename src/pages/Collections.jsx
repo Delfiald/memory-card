@@ -5,6 +5,7 @@ import Help from "../components/Help/Help";
 import PokemonDetails from "../components/Details/PokemonDetails";
 import CollectionsHeader from "../components/Header/CollectionsHeader";
 import CollectionsFooter from "../components/Footer/CollectionsFooter";
+import EmptyCollections from "../components/EmptyCollections/EmptyCollections";
 
 function Collections({
  savedCard,
@@ -57,9 +58,13 @@ function Collections({
 
  const renderPokemonCards = () => {
   if (collectedOnly) {
-   return savedCard
-    .slice((page - 1) * itemPerPage, page * itemPerPage)
-    .map((pokemon) => renderCard(pokemon));
+   if (savedCard.length > 0) {
+    return savedCard
+     .slice((page - 1) * itemPerPage, page * itemPerPage)
+     .map((pokemon) => renderCard(pokemon));
+   } else {
+    return <EmptyCollections />;
+   }
   }
 
   return Array.from({ length: itemPerPage }, (_, index) => {

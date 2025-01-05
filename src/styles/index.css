@@ -168,6 +168,7 @@ ol {
 }
 
 .cards-list-wrapper {
+ position: relative;
  display: grid;
  grid-template-columns: repeat(5, 180px);
  grid-auto-rows: 252px;
