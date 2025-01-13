@@ -22,7 +22,9 @@ function CollectionsFooter({ pokemonTotal, itemPerPage, page, setPage }) {
    <div className="page-number-wrapper">
     {page !== 1 && <button onClick={() => setPage(1)}>1</button>}
 
-    {page > 3 && <button onClick={() => setPage(page - 2)}>...</button>}
+    {totalPage > 4 && page > 3 && (
+     <button onClick={() => setPage(page - 2)}>...</button>
+    )}
 
     {totalPage > 3 && page === totalPage && (
      <button onClick={() => setPage(page - 2)}>{page - 2}</button>
@@ -40,7 +42,7 @@ function CollectionsFooter({ pokemonTotal, itemPerPage, page, setPage }) {
      <button onClick={() => setPage(page + 2)}>{page + 2}</button>
     )}
 
-    {page < totalPage - 2 && (
+    {totalPage > 4 && page < totalPage - 2 && (
      <button onClick={() => setPage(page + 2)}>...</button>
     )}
 
